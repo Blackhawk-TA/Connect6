@@ -11,19 +11,14 @@ class Player {
     }
 
     /**
-     * Get the player id
-     * @return current player id
+     * Switches to the next player
+     * @param amount total amount of players
      */
-    int getId() {
-        return id;
-    }
-
-    /**
-     * Change the player id
-     * @param id new player id
-     */
-    void setId(int id) {
-        this.id = id;
+    void next(int amount) {
+        if (id < amount)
+            id++;
+        else
+            id = 1;
     }
 }
 

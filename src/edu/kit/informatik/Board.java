@@ -1,6 +1,6 @@
 package edu.kit.informatik;
 
-class DefaultBoard {
+class Board {
     private String[][] board;
     private int rows;
     private int columns;
@@ -9,7 +9,7 @@ class DefaultBoard {
      * @param rows amount of rows the board should have
      * @param columns amount of columns the board should have
      */
-    DefaultBoard(int rows, int columns) {
+    Board(int rows, int columns) {
         this.rows = rows;
         this.columns = columns;
 
