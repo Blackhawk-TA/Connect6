@@ -3,7 +3,7 @@ package edu.kit.informatik;
 import java.util.regex.*;
 
 class CommandRegex {
-    private final Pattern pattern = Pattern.compile("^([a-z]+(\\s)*)?(\\d*)?;?(\\d*)?;?(\\d*)?;?(\\d*)$");
+    private final Pattern pattern = Pattern.compile("^([a-z]+(\\s)*)(\\d*)?;?(\\d*)?;?(\\d*)?;?(\\d*)$");
 
     /**
      * Check if a command has any parameters
