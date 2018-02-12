@@ -82,12 +82,14 @@ class Board {
     }
 
     /**
-     * Occupy a field
-     * @param row the row to occupy
-     * @param column the column to occupy
+     * Player occupies a field
+     * @param row1 the row for the first field
+     * @param column1 the column for the first field
+     * @param row2 the row for the second field
+     * @param column2 the column for the second field
      * @return Status after placing (valid, invalid, game over)
      */
-    String placeAt(int row, int column) {
+    String placeAt(int row1, int column1, int row2, int column2) {
         return "PLACEHOLDER";
     }
 }

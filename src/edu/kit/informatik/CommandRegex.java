@@ -3,7 +3,7 @@ package edu.kit.informatik;
 import java.util.regex.*;
 
 class CommandRegex {
-    private final Pattern pattern = Pattern.compile("^([a-z]+(\\s)*)(\\d*)?;?(\\d*)?;?(\\d*)?;?(\\d*)$");
+    private final Pattern pattern = Pattern.compile("^([a-z]+(\\s)*)?(\\d*)?;?(\\d*)?;?(\\d*)?;?(\\d*)$");
 
     /**
      * Check if a command has any parameters
@@ -52,12 +52,13 @@ class CommandRegex {
      */
     String[] createGroups(String arg) {
         String[] groups = new String[4];
+        Matcher matcher = pattern.matcher(arg);
 
-        for (int i = 0; i < groups.length; i++) {
-            if (pattern.matcher(arg).find())
-                groups[i] = pattern.matcher(arg).group(i + 1);
+        if (matcher.find()) {
+            for (int i = 1; i <= matcher.groupCount(); i++) {
+                System.out.printf("Capture Group Number: %s, Captured Text: '%s'%n", i, matcher.group(i));
+            }
         }
-
         return groups;
     }
 }
