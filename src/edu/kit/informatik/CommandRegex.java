@@ -3,6 +3,7 @@ package edu.kit.informatik;
 import java.util.regex.*;
 
 class CommandRegex {
+    // Cobra was here
     private final Pattern pattern = Pattern.compile("^([a-z]+(\\s)*)(\\d*)?;?(\\d*)?;?(\\d*)?;?(\\d*)$");
 
     /**
