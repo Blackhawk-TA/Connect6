@@ -1,10 +1,33 @@
-package edu.kit.informatik;
+package edu.kit.informatik.commands;
 
 import java.util.regex.*;
 
-class CommandRegex {
-    private final Pattern pattern = Pattern.compile("^([a-z]+)(\\s)(\\d*)?;?(\\d*)?;?(\\d*)?;?(\\d*)$");
-    private final int groupMod = 3; //group modifier, used to create the parameter groups from 3 to 6
+public class CommandRegex {
+    /*
+     * Group modifier for input parameters
+     * 0 when input is number only and the parameter is the first entered arg
+     * 3 when input is a normal command like "print" or "place 5;5;5;5"
+     */
+    private int groupMod;
+    private Pattern pattern;
+
+    public CommandRegex(boolean numbersOnly) {
+        if (numbersOnly) {
+            pattern = Pattern.compile("^(\\d*)$");
+            groupMod = 1;
+        } else {
+            pattern = Pattern.compile("^([a-z]+)(\\s)?(\\d*)?;?(\\d*)?;?(\\d*)?;?(\\d*)$");
+            groupMod = 3;
+        }
+    }
+
+    /**
+     * Get regex pattern
+     * @return regex pattern
+     */
+    public Pattern getPattern() {
+        return pattern;
+    }
 
     /**
      * Check if a command has n amount of parameters
@@ -12,12 +35,12 @@ class CommandRegex {
      * @param n amount of parameters the command should have
      * @return true if amount of parameters is n
      */
-    boolean hasParam(String[] groups, int n) {
+    public boolean hasParam(String[] groups, int n) {
         int counter = 0;
 
         for (int i = groupMod; i < groups.length; i++) {
             if (!groups[i].isEmpty())
-                counter++;
+                counter++; //TODO check that to many parameters are wrong as well such as state 5;5;5
         }
 
         return counter == n;
@@ -34,13 +57,13 @@ class CommandRegex {
      * @param arg input command
      * @return array of groups
      */
-    String[] createGroups(String arg) {
+    public String[] createGroups(String arg) {
         String[] groups = new String[7];
         Matcher matcher = pattern.matcher(arg);
 
         if (matcher.find()) {
             for (int i = 0; i <= matcher.groupCount(); i++) {
-                System.out.printf("Capture Group Number: %s, Captured Text: '%s'%n", i, matcher.group(i));
+                System.out.printf("Capture Group Number: %s, Captured Text: '%s'%n", i, matcher.group(i)); //TODO REMOVE
                 groups[i] = matcher.group(i);
             }
         }
@@ -49,12 +72,11 @@ class CommandRegex {
 
     /**
      * Gets the parameters from the command and converts it to int
-     * @param arg the entered command
+     * @param groups the entered command split up in groups
      * @param index index of the param (0-3)
      * @return array of parameters
      */
-    int getParam(String arg, int index) {
-        String[] groups = createGroups(arg);
+    public int getParam(String[] groups, int index) {
         int param = -1;
 
         if (!groups[index + groupMod].isEmpty())

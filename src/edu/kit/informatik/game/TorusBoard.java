@@ -1,11 +1,13 @@
-package edu.kit.informatik;
+package edu.kit.informatik.game;
 
-class TorusBoard extends Board {
+import edu.kit.informatik.game.Board;
+
+public class TorusBoard extends Board {
     /**
      * @param rows amount of rows the board should have
      * @param columns amount of columns the board should have
      */
-    TorusBoard(int rows, int columns) {
+    public TorusBoard(int rows, int columns) {
         super(rows, columns);
     }
 

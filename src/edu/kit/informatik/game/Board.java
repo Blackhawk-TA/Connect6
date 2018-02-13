@@ -1,6 +1,6 @@
-package edu.kit.informatik;
+package edu.kit.informatik.game;
 
-class Board {
+public class Board {
     private String[][] board;
     private int rows;
     private int columns;
@@ -9,7 +9,7 @@ class Board {
      * @param rows amount of rows the board should have
      * @param columns amount of columns the board should have
      */
-    Board(int rows, int columns) {
+    public Board(int rows, int columns) {
         this.rows = rows;
         this.columns = columns;
 
@@ -25,7 +25,7 @@ class Board {
     /**
      * @return get the board itself as 2-dimensional array
      */
-    String[][] getBoard() {
+    public String[][] getBoard() {
         return board;
     }
 
@@ -33,7 +33,7 @@ class Board {
      * get amount of rows of the board
      * @return amount of rows
      */
-    int getRows() {
+    public int getRows() {
         return rows;
     }
 
@@ -41,7 +41,7 @@ class Board {
      * get amount of columns of the board
      * @return amount of columns
      */
-    int getColumns() {
+    public int getColumns() {
         return columns;
     }
 
