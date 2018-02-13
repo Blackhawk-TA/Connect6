@@ -3,7 +3,7 @@ package edu.kit.informatik;
 import java.util.regex.*;
 
 class CommandRegex {
-    private final Pattern pattern = Pattern.compile("^([a-z]+)(\\s)?(\\d*)?;?(\\d*)?;?(\\d*)?;?(\\d*)$");
+    private final Pattern pattern = Pattern.compile("^([a-z]+)(\\s)(\\d*)?;?(\\d*)?;?(\\d*)?;?(\\d*)$");
     private final int groupMod = 3; //group modifier, used to create the parameter groups from 3 to 6
 
     /**
