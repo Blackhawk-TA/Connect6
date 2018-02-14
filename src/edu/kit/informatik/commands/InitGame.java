@@ -25,7 +25,7 @@ public class InitGame {
         switch (initStage) {
             case 0: //First init stage
                 if (regex.getPattern().matcher(arg).find()) {
-                    if (arg.matches("standard") && regex.hasParam(groups, 0)) {
+                    if (arg.matches("standard") && regex.hasParam(groups, 0)) { //TODO maybe set stuff in command handler
                         type = BoardType.STANDARD;
                         initStage++;
                     } else if (arg.matches("torus") && regex.hasParam(groups, 0)) {
@@ -52,6 +52,8 @@ public class InitGame {
                     } else {
                         Terminal.printError("invalid size.");
                     }
+                } else {
+                    Terminal.printError("unknown command, board size expected.");
                 }
                 break;
             case 2: //Finish initialisation

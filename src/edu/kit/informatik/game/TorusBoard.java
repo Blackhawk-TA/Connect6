@@ -21,4 +21,6 @@ public class TorusBoard extends Board {
     boolean inGameBoard(int row, int column) {
         return true; //TODO Implement
     }
+
+    void convertToTorus() {} //TODO This function converts out of bind fields to normal fields
 }

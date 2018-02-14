@@ -8,12 +8,12 @@ public class InputHandler {
      * Handles all console commands
      */
     public static void inputs() {
+        InitGame initGame = new InitGame();
         CommandHandler handler = new CommandHandler();
         CommandRegex regex = new CommandRegex(false); //Group arg inputs start at index 3
         boolean running = true;
 
         while (running) {
-            InitGame initGame = new InitGame();
             Board board = initGame.getBoard();
             String input = Terminal.readLine();
             String[] groups = regex.createGroups(input);
