@@ -3,30 +3,27 @@ package edu.kit.informatik.commands;
 import java.util.regex.*;
 
 public class CommandRegex {
+    //TODO CHECK IF GROUP 2 (space) is existing
     /*
      * Group modifier for input parameters
-     * 0 when input is number only and the parameter is the first entered arg
-     * 3 when input is a normal command like "print" or "place 5;5;5;5"
+     * 1 when input is for game init, params start at index 1
+     * 3 when input is a normal command like "print" or "place 5;5;5;5", params start at index 3
      */
     private int groupMod;
+    private int groupNum; //Amount of expected groups in a regex
     private Pattern pattern;
 
-    public CommandRegex(boolean numbersOnly) {
-        if (numbersOnly) {
-            pattern = Pattern.compile("^(\\d*)$");
+    public CommandRegex(boolean init) {
+        if (init) {
+            pattern = Pattern.compile("^(standard|torus)(\\s)(18|20)(\\s)([2-4])$"); //pattern for init param
             groupMod = 1;
-        } else {
-            pattern = Pattern.compile("^([a-z]+)(\\s)?(\\d*)?;?(\\d*)?;?(\\d*)?;?(\\d*)$");
-            groupMod = 3;
+            groupNum = 6;
         }
-    }
-
-    /**
-     * Get regex pattern
-     * @return regex pattern
-     */
-    public Pattern getPattern() {
-        return pattern;
+        else {
+            pattern = Pattern.compile("^([a-z]+)(\\s)?(\\d*)?;?(\\d*)?;?(\\d*)?;?(\\d*)$"); //pattern for normal cmd
+            groupMod = 3;
+            groupNum = 7;
+        }
     }
 
     /**
@@ -48,17 +45,11 @@ public class CommandRegex {
 
     /**
      * Get groups from the chat command
-     * Group 1: command
-     * Group 2: whitespace
-     * Group 3: param 1
-     * Group 4: param 2
-     * Group 5: param 3
-     * Group 6: param 4
      * @param arg input command
      * @return array of groups
      */
     public String[] createGroups(String arg) {
-        String[] groups = new String[7];
+        String[] groups = new String[groupNum];
         Matcher matcher = pattern.matcher(arg);
 
         if (matcher.find()) {
@@ -73,7 +64,7 @@ public class CommandRegex {
     /**
      * Gets the parameters from the command and converts it to int
      * @param groups the entered command split up in groups
-     * @param index index of the param (0-3)
+     * @param index index of the param
      * @return array of parameters
      */
     public int getParam(String[] groups, int index) {
