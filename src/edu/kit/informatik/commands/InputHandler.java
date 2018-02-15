@@ -2,6 +2,7 @@ package edu.kit.informatik.commands;
 
 import edu.kit.informatik.game.Board;
 import edu.kit.informatik.*;
+import edu.kit.informatik.game.GameCore;
 
 public class InputHandler {
     /**
@@ -13,7 +14,7 @@ public class InputHandler {
         boolean running = true;
 
         while (running) {
-            Board board = new Board(20, 20); //TODO get board from GameCore class (this is a placeholder)
+            Board board; //TODO get board from GameCore class (this is a placeholder)
             String input = Terminal.readLine();
             String[] groups = regex.createGroups(input);
             String arg = groups[1]; //The main command of the argument (such as "print", "quit")
