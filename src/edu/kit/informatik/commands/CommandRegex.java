@@ -2,7 +2,7 @@ package edu.kit.informatik.commands;
 
 import java.util.regex.*;
 
-public class CommandRegex {
+class CommandRegex {
     //TODO CHECK IF GROUP 2 (space) is existing
     /*
      * Group modifier for input parameters

@@ -1,6 +1,6 @@
-package edu.kit.informatik;
+package edu.kit.informatik.commands;
 
-public enum PrintType {
+enum PrintType {
     /**
      * Print type row
      */

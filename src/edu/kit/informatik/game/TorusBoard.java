@@ -1,7 +1,5 @@
 package edu.kit.informatik.game;
 
-import edu.kit.informatik.game.Board;
-
 public class TorusBoard extends Board {
     /**
      * @param rows amount of rows the board should have
