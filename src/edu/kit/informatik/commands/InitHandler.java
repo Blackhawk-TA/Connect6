@@ -7,9 +7,8 @@ public class InitHandler {
     /**
      * Check init params and apply them
      * @param args the init params
-     * @return true if init successful
      */
-    public static boolean init(String[] args) {
+    public void init(String[] args) {
         //Format String array to normal String
         StringBuilder argsFormatted = new StringBuilder();
         for (String arg: args) {
@@ -22,25 +21,17 @@ public class InitHandler {
         String[] groups = regex.createGroups(input);
 
         if (regex.hasParam(groups, 3)) {
-            String gameType = groups[0]; //Get first parameter as String
+            String gameType = groups[1]; //Get first parameter as String
             int boardSize = regex.getParam(groups, 1);
             int playerNum = regex.getParam(groups, 2);
 
-            GameCore core = new GameCore(); //TODO maybe setter und getter?
+            GameCore core = new GameCore();
+            core.setup(gameType, boardSize, playerNum);
 
-            //Set board mode to standard or torus
-            if (gameType.matches("standard")) {
-                core.setBoard(new Board(boardSize, boardSize));
-            } else {
-                core.setBoard(new TorusBoard(boardSize, boardSize));
-            }
-
-            core.setPlayer(new Player(playerNum));
-
-            return true;
+            InputHandler handler = new InputHandler(core.getBoard());
+            handler.inputs();
         } else {
-            Terminal.printError(" invalid start parameters.");
-            return false;
+            Terminal.printError("invalid start parameters.");
         }
     }
 }

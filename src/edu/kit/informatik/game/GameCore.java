@@ -5,19 +5,22 @@ public class GameCore {
     private Board board;
     private Player player;
 
+    public void setup(String gameType, int boardSize, int playerNum) {
+        //Set board mode to standard or torus
+        if (gameType.matches("standard")) {
+            board = new Board(boardSize, boardSize);
+        } else {
+            board = new TorusBoard(boardSize, boardSize);
+        }
+
+        player = new Player(playerNum);
+    }
+
     public Board getBoard() {
         return board;
     }
 
-    public void setBoard(Board board) {
-        this.board = board;
-    }
-
     public Player getPlayer() {
         return player;
-    }
-
-    public void setPlayer(Player player) {
-        this.player = player;
     }
 }

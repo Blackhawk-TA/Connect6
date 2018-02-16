@@ -9,8 +9,7 @@ public class Main {
      * @param args console input, not used!
      */
     public static void main(String[] args) {
-        if (InitHandler.init(args)) {
-            InputHandler.inputs();
-        }
+        InitHandler handler = new InitHandler();
+        handler.init(args);
     }
 }

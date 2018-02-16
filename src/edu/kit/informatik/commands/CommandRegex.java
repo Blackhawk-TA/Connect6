@@ -40,8 +40,12 @@ class CommandRegex {
         int counter = 0;
 
         for (int i = groupMod; i < groups.length; i++) {
+            if (counter == n && !groups[i].isEmpty()) {
+                return false;
+            }
+
             if (groups[i] != null && !groups[i].isEmpty())
-                counter++; //TODO check that to many parameters are wrong as well such as state 5;5;5
+                counter++;
         }
 
         return counter == n;
