@@ -25,7 +25,7 @@ public class Board {
     /**
      * @return get the board itself as 2-dimensional array
      */
-    public String[][] getBoard() {
+    public String[][] getBoardString() {
         return board;
     }
 

@@ -13,7 +13,7 @@ public class CommandHandler {
         StringBuilder boardFormatted = new StringBuilder();
         for (int i = 0; i < board.getRows(); i++) {
             for (int j = 0; j < board.getColumns(); j++) {
-                boardFormatted.append(board.getBoard()[i][j]);
+                boardFormatted.append(board.getBoardString()[i][j]);
             }
             boardFormatted.append("\n");
         }
@@ -29,11 +29,11 @@ public class CommandHandler {
      */
     String linePrint(Board board, int n, PrintType type) {
         StringBuilder boardFormatted = new StringBuilder();
-        for (int i = 0; i < board.getBoard().length; i++) {
+        for (int i = 0; i < board.getBoardString().length; i++) {
             if (type == PrintType.ROW)
-                boardFormatted.append(board.getBoard()[n][i]);
+                boardFormatted.append(board.getBoardString()[n][i]);
             else if (type == PrintType.COLUMN)
-                boardFormatted.append(board.getBoard()[i][n]);
+                boardFormatted.append(board.getBoardString()[i][n]);
         }
         return boardFormatted.toString();
     }
@@ -46,7 +46,7 @@ public class CommandHandler {
      * @return registered entry at requested field
      */
     String stateOf(Board board, int row, int column) {
-        return board.getBoard()[row][column];
+        return board.getBoardString()[row][column];
     }
 
     /**

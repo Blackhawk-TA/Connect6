@@ -11,10 +11,12 @@ public class InputHandler {
     public static void inputs() {
         CommandHandler handler = new CommandHandler();
         CommandRegex regex = new CommandRegex(false); //Group arg inputs start at index 3
+
         boolean running = true;
 
         while (running) {
-            Board board; //TODO get board from GameCore class (this is a placeholder)
+            GameCore core = new GameCore();
+            Board board = core.getBoard(); //TODO might not work because board is set in init class
             String input = Terminal.readLine();
             String[] groups = regex.createGroups(input);
             String arg = groups[1]; //The main command of the argument (such as "print", "quit")
@@ -45,21 +47,5 @@ public class InputHandler {
                 Terminal.printError("unknown command.");
             }
         }
-    }
-
-    /**
-     * Handle inital number input for player amount and board size
-     * @param groups input splitted to groups
-     * @return input converted to string
-     */
-    public static int getInputNumber(String[] groups) {
-        int number = -1;
-        CommandRegex regex = new CommandRegex(true); //Group arg inputs start at index 0
-
-        if (regex.hasParam(groups, 0)) {
-            number = regex.getParam(groups, 0);
-        }
-
-        return number;
     }
 }

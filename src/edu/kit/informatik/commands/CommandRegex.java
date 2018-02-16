@@ -13,11 +13,15 @@ public class CommandRegex {
     private int groupNum; //Amount of expected groups in a regex
     private Pattern pattern;
 
-    public CommandRegex(boolean init) {
+    /**
+     * Regex Constructor
+     * @param init when true, check if pattern fits init. When false check if pattern fits normal commands
+     */
+    CommandRegex(boolean init) {
         if (init) {
-            pattern = Pattern.compile("^(standard|torus)(\\s)(18|20)(\\s)([2-4])$"); //pattern for init param
+            pattern = Pattern.compile("^(standard|torus)\\s(18|20)\\s([2-4])$"); //pattern for init param
             groupMod = 1;
-            groupNum = 6;
+            groupNum = 4;
         }
         else {
             pattern = Pattern.compile("^([a-z]+)(\\s)?(\\d*)?;?(\\d*)?;?(\\d*)?;?(\\d*)$"); //pattern for normal cmd
@@ -32,11 +36,11 @@ public class CommandRegex {
      * @param n amount of parameters the command should have
      * @return true if amount of parameters is n
      */
-    public boolean hasParam(String[] groups, int n) {
+    boolean hasParam(String[] groups, int n) {
         int counter = 0;
 
         for (int i = groupMod; i < groups.length; i++) {
-            if (!groups[i].isEmpty())
+            if (groups[i] != null && !groups[i].isEmpty())
                 counter++; //TODO check that to many parameters are wrong as well such as state 5;5;5
         }
 
@@ -48,7 +52,7 @@ public class CommandRegex {
      * @param arg input command
      * @return array of groups
      */
-    public String[] createGroups(String arg) {
+    String[] createGroups(String arg) {
         String[] groups = new String[groupNum];
         Matcher matcher = pattern.matcher(arg);
 
@@ -67,7 +71,7 @@ public class CommandRegex {
      * @param index index of the param
      * @return array of parameters
      */
-    public int getParam(String[] groups, int index) {
+    int getParam(String[] groups, int index) {
         int param = -1;
 
         if (!groups[index + groupMod].isEmpty())
