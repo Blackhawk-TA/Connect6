@@ -1,7 +1,6 @@
 package edu.kit.informatik;
 
 import edu.kit.informatik.commands.InitHandler;
-import edu.kit.informatik.commands.InputHandler;
 
 public class Main {
     /**

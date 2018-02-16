@@ -20,5 +20,10 @@ public class TorusBoard extends Board {
         return true; //TODO Implement
     }
 
-    void convertToTorus() {} //TODO This function converts out of bind fields to normal fields
+    /**
+     * This function converts inputs placed outside to field to existing fields in torus
+     */
+    void convertToTorus() {
+
+    }
 }

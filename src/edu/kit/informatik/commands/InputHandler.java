@@ -5,6 +5,10 @@ import edu.kit.informatik.game.Board;
 
 public class InputHandler extends CommandHandler {
 
+    /**
+     * InputHandler constructor
+     * @param board the game board
+     */
     InputHandler(Board board) {
         super(board);
     }
