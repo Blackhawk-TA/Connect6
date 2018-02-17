@@ -1,7 +1,11 @@
 package edu.kit.informatik.commands;
 
+import edu.kit.informatik.formatter.FormatType;
+import edu.kit.informatik.formatter.LineFormat;
 import edu.kit.informatik.game.Board;
 import edu.kit.informatik.game.GameCore;
+import edu.kit.informatik.game.Player;
+import edu.kit.informatik.game.WinValidator;
 
 class CommandHandler extends GameCore {
     private Board board;
@@ -30,20 +34,25 @@ class CommandHandler extends GameCore {
     }
 
     /**
-     * Prints either row or column depending on type
+     * Formats either row or column depending on type to a String
      * @param n number of the row/column to print
      * @param type defines if print mode is row or column
      * @return board row/column as String
      */
-    String linePrint(int n, PrintType type) {
-        StringBuilder boardFormatted = new StringBuilder();
-        for (int i = 0; i < board.getBoardString().length; i++) {
-            if (type == PrintType.ROW)
-                boardFormatted.append(board.getBoardString()[n][i]);
-            else if (type == PrintType.COLUMN)
-                boardFormatted.append(board.getBoardString()[i][n]);
-        }
-        return boardFormatted.toString();
+    String linePrint(int n, FormatType type) {
+        LineFormat format = new LineFormat(board);
+        return format.toLine(n, type);
+    }
+
+    /**
+     * Reset the game with the already chosen start parameters
+     * @param args the start parameters
+     * @return OK when successful
+     */
+    String reset(String[] args) {
+        InitHandler handler = new InitHandler();
+        handler.init(args);
+        return "OK";
     }
 
     /**
@@ -65,6 +74,24 @@ class CommandHandler extends GameCore {
      * @return Status after placing (valid, invalid, game over)
      */
     String placeAt(int row1, int column1, int row2, int column2) {
-        return "PLACEHOLDER";
+        Player player = super.getPlayer();
+        WinValidator validator = new WinValidator();
+        boolean draw = validator.checkDraw();
+        String winner = validator.checkWin();
+        boolean noWin = winner.isEmpty();
+
+        if (!draw && noWin) {
+            //Place at field
+            board.setBoardString(row1, column1, player.getName());
+            board.setBoardString(row2, column2, player.getName());
+            player.next(); //Switch to next player
+            return "OK";
+        } else if (draw && noWin) {
+            return "draw";
+        } else if (!draw && !noWin) {
+            return winner + "wins";
+        } else {
+            return "Error, unexpected exception.";
+        }
     }
 }

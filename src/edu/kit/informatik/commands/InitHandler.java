@@ -17,7 +17,7 @@ public class InitHandler {
         String input = argsFormatted.toString();
 
         //Check regex
-        CommandRegex regex = new CommandRegex(true);
+        CommandRegex regex = new CommandRegex("init");
         String[] groups = regex.createGroups(input);
 
         if (regex.hasParam(groups, 3)) {
@@ -29,7 +29,7 @@ public class InitHandler {
             core.setup(gameType, boardSize, playerNum);
 
             InputHandler handler = new InputHandler(core.getBoard());
-            handler.inputs();
+            handler.inputs(args);
         } else {
             Terminal.printError("invalid start parameters.");
         }

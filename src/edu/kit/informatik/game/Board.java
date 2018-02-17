@@ -30,6 +30,16 @@ public class Board {
     }
 
     /**
+     * Add a player to a specific field
+     * @param row the row where to place the player
+     * @param column the column where to place the player
+     * @param plyName the name of the player
+     */
+    public void setBoardString(int row, int column, String plyName) {
+        board[row][column] = plyName;
+    }
+
+    /**
      * get amount of rows of the board
      * @return amount of rows
      */
@@ -53,5 +63,15 @@ public class Board {
      */
     boolean inGameBoard(int row, int column) {
         return !(row < 0 || row >= this.rows || column < 0 || column >= this.columns);
+    }
+
+    /**
+     * Check if field is empty
+     * @param row the row of the field
+     * @param column the column of the field
+     * @return true when empty, false when occupied
+     */
+    private boolean fieldEmpty(int row, int column) {
+        return board[row][column].equals("** ");
     }
 }
