@@ -2,6 +2,7 @@ package edu.kit.informatik.commands;
 
 import edu.kit.informatik.Terminal;
 import edu.kit.informatik.game.Board;
+import edu.kit.informatik.formatter.*;
 
 public class InputHandler extends CommandHandler {
 
@@ -15,9 +16,10 @@ public class InputHandler extends CommandHandler {
 
     /**
      * Handles all console commands
+     * @param args the start parameters
      */
-    public void inputs() {
-        CommandRegex regex = new CommandRegex(false); //Group arg inputs start at index 3
+    public void inputs(String[] args) {
+        CommandRegex regex = new CommandRegex("command"); //Group arg inputs start at index 3
 
         boolean running = true;
 
@@ -34,16 +36,17 @@ public class InputHandler extends CommandHandler {
                 Terminal.printLine(super.print());
             }
             else if (arg.matches("reset") && regex.hasParam(groups, 0)) {
-                //TODO implement
+                Terminal.printLine(super.reset(args));
             }
             else if (arg.matches("rowprint") && regex.hasParam(groups, 1)) {
-                Terminal.printLine(super.linePrint(regex.getParam(groups, 0), PrintType.ROW));
+                Terminal.printLine(super.linePrint(regex.getParam(groups, 0), FormatType.ROW));
             }
             else if (arg.matches("colprint") && regex.hasParam(groups, 1)) {
-                Terminal.printLine(super.linePrint(regex.getParam(groups, 0), PrintType.COLUMN));
+                Terminal.printLine(super.linePrint(regex.getParam(groups, 0), FormatType.COLUMN));
             }
             else if (arg.matches("place") && regex.hasParam(groups, 4)) {
-                //TODO implement
+                Terminal.printLine(super.placeAt(regex.getParam(groups, 0), regex.getParam(groups, 1),
+                                                    regex.getParam(groups, 2), regex.getParam(groups, 3)));
             }
             else if (arg.matches("state") && regex.hasParam(groups, 2)) {
                 Terminal.printLine(super.stateOf(regex.getParam(groups, 0), regex.getParam(groups, 1)));

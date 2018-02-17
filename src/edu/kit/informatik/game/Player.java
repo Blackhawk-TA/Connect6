@@ -8,7 +8,7 @@ public class Player {
      * Player constructor
      * @param amount total amount of players
      */
-    public Player(int amount) {
+    Player(int amount) {
         this.id = 0;
         this.amount = amount;
     }
@@ -16,11 +16,20 @@ public class Player {
     /**
      * Switches to the next player
      */
-    void next() {
+    public void next() {
         if (id < amount)
             id++;
         else
             id = 0;
+    }
+
+    /**
+     * Get the player name like it is presented at the field (such as "P1 " or "P2 ")
+     * @return the player name
+     */
+    public String getName() {
+        int plyNum = id + 1;
+        return "P" + plyNum + " ";
     }
 }
 

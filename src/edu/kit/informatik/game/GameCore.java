@@ -1,7 +1,6 @@
 package edu.kit.informatik.game;
 
 public class GameCore {
-    //TODO regex for win lose ^([**\\s]*)(P1\s){6}([**\\s]*)$
     private Board board;
     private Player player;
 
@@ -34,7 +33,7 @@ public class GameCore {
      * Get player class
      * @return the player class
      */
-    public Player getPlayer() {
+    protected Player getPlayer() {
         return player;
     }
 }

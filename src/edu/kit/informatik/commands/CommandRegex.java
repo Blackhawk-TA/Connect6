@@ -2,12 +2,13 @@ package edu.kit.informatik.commands;
 
 import java.util.regex.*;
 
-class CommandRegex {
+public class CommandRegex {
     //TODO CHECK IF GROUP 2 (space) is existing
     /*
      * Group modifier for input parameters
      * 1 when input is for game init, params start at index 1
      * 3 when input is a normal command like "print" or "place 5;5;5;5", params start at index 3
+     * 6 when input is a winCheck, param which shows who won starts at 6
      */
     private int groupMod;
     private int groupNum; //Amount of expected groups in a regex
@@ -15,18 +16,27 @@ class CommandRegex {
 
     /**
      * Regex Constructor
-     * @param init when true, check if pattern fits init. When false check if pattern fits normal commands
+     * @param mode the regex mode, "init" for start param check, "command" for input check, "winCheck" for win check.
      */
-    CommandRegex(boolean init) {
-        if (init) {
-            pattern = Pattern.compile("^(standard|torus)\\s(18|20)\\s([2-4])$"); //pattern for init param
-            groupMod = 1;
-            groupNum = 4;
-        }
-        else {
-            pattern = Pattern.compile("^([a-z]+)(\\s)?(\\d*)?;?(\\d*)?;?(\\d*)?;?(\\d*)$"); //pattern for normal cmd
-            groupMod = 3;
-            groupNum = 7;
+    public CommandRegex(String mode) {
+        switch (mode) {
+            case "init":
+                pattern = Pattern.compile("^(standard|torus)\\s(18|20)\\s([2-4])$"); //pattern for init param
+                groupMod = 1;
+                groupNum = 4;
+                break;
+            case "command":
+                pattern = Pattern.compile("^([a-z]+)(\\s)?(\\d*)?;?(\\d*)?;?(\\d*)?;?(\\d*)$"); //pattern for normal cmd
+                groupMod = 3;
+                groupNum = 7;
+                break;
+            case "winCheck":
+                pattern = Pattern.compile("([**\\s]*)((P1\\s){6}|(P2\\s){6}|(P3\\s){6}|(P4\\s){6})([**\\s]*)$");
+                groupMod = 6;
+                groupNum = 6;
+                break;
+            default:
+                break;
         }
     }
 
@@ -36,7 +46,7 @@ class CommandRegex {
      * @param n amount of parameters the command should have
      * @return true if amount of parameters is n
      */
-    boolean hasParam(String[] groups, int n) {
+    public boolean hasParam(String[] groups, int n) {
         int counter = 0;
 
         for (int i = groupMod; i < groups.length; i++) {
@@ -56,7 +66,7 @@ class CommandRegex {
      * @param arg input command
      * @return array of groups
      */
-    String[] createGroups(String arg) {
+    public String[] createGroups(String arg) {
         String[] groups = new String[groupNum];
         Matcher matcher = pattern.matcher(arg);
 
@@ -75,7 +85,7 @@ class CommandRegex {
      * @param index index of the param
      * @return array of parameters
      */
-    int getParam(String[] groups, int index) {
+    public int getParam(String[] groups, int index) {
         int param = -1;
 
         if (!groups[index + groupMod].isEmpty())
