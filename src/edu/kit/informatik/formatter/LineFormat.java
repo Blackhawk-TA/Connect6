@@ -44,4 +44,31 @@ public class LineFormat extends GameCore {
         }
         return lines;
     }
+
+    /**
+     * Convert the diagonals to normal lines to check winner
+     * @param board the game board
+     * @param type the type of diagonals, DIAGLB for bottom left to top right, DIAGLT for top left to bottom right
+     * @return the diagonals as line
+     */
+    public String[] getDiagLines(Board board, FormatType type) {
+        int rows = board.getRows();
+        int columns = board.getColumns();
+        String[] diagonalLines = new String[rows];
+
+        if (type == FormatType.DIAG_BOTTOMLEFT) {
+            for (int i = 0; i < rows; i++) {
+                for (int j = 0; j < columns; j++) {
+                    diagonalLines[i] = board.getBoardString()[i][j];
+                }
+            }
+        } else {
+            for (int i = rows; i > 0; i--) {
+                for (int j = columns; j > 0; j--) {
+                    diagonalLines[i] = board.getBoardString()[i][j];
+                }
+            }
+        }
+        return diagonalLines;
+    }
 }
