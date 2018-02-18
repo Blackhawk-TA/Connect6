@@ -9,7 +9,7 @@ public class Board {
      * @param rows amount of rows the board should have
      * @param columns amount of columns the board should have
      */
-    public Board(int rows, int columns) {
+    Board(int rows, int columns) {
         this.rows = rows;
         this.columns = columns;
 
@@ -23,6 +23,23 @@ public class Board {
     }
 
     /**
+     * Get amount of rows of the board
+     * @return amount of rows
+     */
+    public int getRows() {
+        return rows;
+    }
+
+    /**
+     * Get amount of columns of the board
+     * @return amount of columns
+     */
+    public int getColumns() {
+        return columns;
+    }
+
+    /**
+     * Get the board as 2-dimensional String Array
      * @return get the board itself as 2-dimensional array
      */
     public String[][] getBoardString() {
@@ -37,22 +54,6 @@ public class Board {
      */
     public void setBoardString(int row, int column, String plyName) {
         board[row][column] = plyName;
-    }
-
-    /**
-     * get amount of rows of the board
-     * @return amount of rows
-     */
-    public int getRows() {
-        return rows;
-    }
-
-    /**
-     * get amount of columns of the board
-     * @return amount of columns
-     */
-    public int getColumns() {
-        return columns;
     }
 
     /**

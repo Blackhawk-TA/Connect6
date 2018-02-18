@@ -3,7 +3,7 @@ package edu.kit.informatik.commands;
 import java.util.regex.*;
 
 public class CommandRegex {
-    //TODO CHECK IF GROUP 2 (space) is existing
+    //TODO CHECK IF GROUP 2 (space) is existing - print_ is accepted, this shouldn't happen
     /*
      * Group modifier for input parameters
      * 1 when input is for game init, params start at index 1
