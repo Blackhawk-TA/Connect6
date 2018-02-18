@@ -1,7 +1,6 @@
 package edu.kit.informatik.commands;
 
-import edu.kit.informatik.formatter.FormatType;
-import edu.kit.informatik.formatter.LineFormat;
+import edu.kit.informatik.formatter.*;
 import edu.kit.informatik.game.Board;
 import edu.kit.informatik.game.GameCore;
 import edu.kit.informatik.game.Player;
@@ -76,22 +75,25 @@ class CommandHandler extends GameCore {
     String placeAt(int row1, int column1, int row2, int column2) {
         Player player = super.getPlayer();
         WinValidator validator = new WinValidator();
-        boolean draw = validator.checkDraw();
-        String winner = validator.checkWin();
+        boolean draw = validator.checkDraw(board);
+        String winner = validator.checkWin(board);
         boolean noWin = winner.isEmpty();
 
         if (!draw && noWin) {
             //Place at field
-            board.setBoardString(row1, column1, player.getName());
-            board.setBoardString(row2, column2, player.getName());
-            player.next(); //Switch to next player
-            return "OK";
+            if (board.inGameBoard(row1, column1) && board.fieldEmpty(row1, column1)
+                    && board.inGameBoard(row2, column2) && board.fieldEmpty(row2, column2)) {
+                board.setBoardString(row1, column1, player.getName());
+                board.setBoardString(row2, column2, player.getName());
+                player.next(); //Switch to next player
+                return "OK";
+            } else {
+                return "Error, field occupied.";
+            }
         } else if (draw && noWin) {
             return "draw";
-        } else if (!draw && !noWin) {
-            return winner + "wins";
         } else {
-            return "Error, unexpected exception.";
+            return winner + "wins";
         }
     }
 }

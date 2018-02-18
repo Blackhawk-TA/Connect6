@@ -3,14 +3,7 @@ package edu.kit.informatik.commands;
 import java.util.regex.*;
 
 public class CommandRegex {
-    //TODO CHECK IF GROUP 2 (space) is existing - print_ is accepted, this shouldn't happen
-    /*
-     * Group modifier for input parameters
-     * 1 when input is for game init, params start at index 1
-     * 3 when input is a normal command like "print" or "place 5;5;5;5", params start at index 3
-     * 6 when input is a winCheck, param which shows who won starts at 6
-     */
-    private int groupMod;
+    private int groupMod; //Group modifier for input parameters
     private int groupNum; //Amount of expected groups in a regex
     private Pattern pattern;
 
@@ -22,18 +15,18 @@ public class CommandRegex {
         switch (mode) {
             case "init":
                 pattern = Pattern.compile("^(standard|torus)\\s(18|20)\\s([2-4])$"); //pattern for init param
-                groupMod = 1;
+                groupMod = 1; //when input is for game init, params start at index 1
                 groupNum = 4;
                 break;
             case "command":
                 pattern = Pattern.compile("^([a-z]+)(\\s)?(\\d*)?;?(\\d*)?;?(\\d*)?;?(\\d*)$"); //pattern for normal cmd
-                groupMod = 3;
+                groupMod = 3; //when input is a normal command like "print" or "place 5;5;5;5", params start at index 3
                 groupNum = 7;
                 break;
             case "winCheck":
-                pattern = Pattern.compile("([**\\s]*)((P1\\s){6}|(P2\\s){6}|(P3\\s){6}|(P4\\s){6})([**\\s]*)$");
-                groupMod = 6;
-                groupNum = 6;
+                pattern = Pattern.compile("^([*]{2}\\s)*((P1\\s){6}|(P2\\s){6}|(P3\\s){6}|(P4\\s){6})([*]{2}\\s)*$");
+                groupMod = 4; //when input is a winCheck, param which shows who won starts at 4
+                groupNum = 8;
                 break;
             default:
                 break;
@@ -48,6 +41,9 @@ public class CommandRegex {
      */
     public boolean hasParam(String[] groups, int n) {
         int counter = 0;
+
+        if (n == 0 && groups[2] != null)
+            return false;
 
         for (int i = groupMod; i < groups.length; i++) {
             if (counter == n && !groups[i].isEmpty()) {
@@ -82,7 +78,7 @@ public class CommandRegex {
     /**
      * Gets the parameters from the command and converts it to int
      * @param groups the entered command split up in groups
-     * @param index index of the param
+     * @param index  index of the param
      * @return array of parameters
      */
     public int getParam(String[] groups, int index) {
@@ -92,5 +88,15 @@ public class CommandRegex {
             param = Integer.parseInt(groups[index + groupMod]);
 
         return param;
+    }
+
+    /**
+     * Check if input is valid
+     * @param arg input arguments
+     * @return true if input is valid
+     */
+    public boolean isValid(String arg) {
+        //check if arg matches pattern + last char is not ";"
+        return pattern.matcher(arg).find() && !arg.substring(arg.length() - 1).equals(";");
     }
 }

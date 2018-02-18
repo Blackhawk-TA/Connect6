@@ -16,7 +16,7 @@ public class TorusBoard extends Board {
      * @return true when field is in board
      */
     @Override
-    boolean inGameBoard(int row, int column) {
+    public boolean inGameBoard(int row, int column) {
         return true; //TODO Implement
     }
 

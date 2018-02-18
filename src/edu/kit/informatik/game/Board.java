@@ -62,7 +62,7 @@ public class Board {
      * @param column the row to check
      * @return true when field is in board
      */
-    boolean inGameBoard(int row, int column) {
+    public boolean inGameBoard(int row, int column) {
         return !(row < 0 || row >= this.rows || column < 0 || column >= this.columns);
     }
 
@@ -72,7 +72,7 @@ public class Board {
      * @param column the column of the field
      * @return true when empty, false when occupied
      */
-    private boolean fieldEmpty(int row, int column) {
+    public boolean fieldEmpty(int row, int column) {
         return board[row][column].equals("** ");
     }
 }
