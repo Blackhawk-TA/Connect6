@@ -78,7 +78,7 @@ public class CommandRegex {
     /**
      * Gets the parameters from the command and converts it to int
      * @param groups the entered command split up in groups
-     * @param index  index of the param
+     * @param index index of the param
      * @return array of parameters
      */
     public int getParam(String[] groups, int index) {
