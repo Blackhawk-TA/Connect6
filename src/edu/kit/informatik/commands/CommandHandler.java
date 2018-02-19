@@ -85,7 +85,7 @@ class CommandHandler extends GameCore {
                     && board.inGameBoard(row2, column2) && board.fieldEmpty(row2, column2)) {
                 board.setBoardString(row1, column1, player.getName());
                 board.setBoardString(row2, column2, player.getName());
-                player.next(); //Switch to next player
+                player.next();
                 return "OK";
             } else {
                 return "Error, field occupied.";

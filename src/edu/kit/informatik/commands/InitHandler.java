@@ -1,7 +1,7 @@
 package edu.kit.informatik.commands;
 
+import edu.kit.informatik.game.GameCore;
 import edu.kit.informatik.Terminal;
-import edu.kit.informatik.game.*;
 
 public class InitHandler {
     /**
