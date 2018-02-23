@@ -28,7 +28,8 @@ public class WinValidator {
      * @param board the game board
      */
     public String checkWin(Board board) {
-        LineFormat format = new LineFormat(board);
+        return ""; //TODO remove
+        /*LineFormat format = new LineFormat(board);
         String[] horizontal = format.getLines(board.getRows(), FormatType.ROW);
         String[] vertical = format.getLines(board.getColumns(), FormatType.COLUMN);
         String[] diagLB = format.getDiagLines(board, FormatType.DIAG_BOTTOMLEFT);
@@ -50,7 +51,7 @@ public class WinValidator {
             return diagLTWin;
         } else {
             return ""; //no winner
-        }
+        }*/
     }
 
     /**

@@ -8,13 +8,15 @@ import edu.kit.informatik.game.WinValidator;
 
 class CommandHandler extends GameCore {
     private Board board;
+    private Player player;
 
     /**
      * CommandHandler constructor
      * @param board the game board
      */
-    CommandHandler(Board board) {
+    CommandHandler(Board board, Player player) {
         this.board = board;
+        this.player = player;
     }
 
     /**
@@ -51,7 +53,7 @@ class CommandHandler extends GameCore {
     String reset(String[] args) {
         InitHandler handler = new InitHandler();
         handler.init(args);
-        return "OK";
+        return "OK"; //TODO returns "OK" after only after quit and not after setup because init runs the whole time...
     }
 
     /**
@@ -73,22 +75,24 @@ class CommandHandler extends GameCore {
      * @return Status after placing (valid, invalid, game over)
      */
     String placeAt(int row1, int column1, int row2, int column2) {
-        Player player = super.getPlayer();
+        System.out.println("ok " + player);
         WinValidator validator = new WinValidator();
         boolean draw = validator.checkDraw(board);
         String winner = validator.checkWin(board);
         boolean noWin = winner.isEmpty();
+        boolean valid1 = false;
+        boolean valid2 = false;
 
         if (!draw && noWin) {
-            //Place at field
-            if (board.inGameBoard(row1, column1) && board.fieldEmpty(row1, column1)
+            if ((row1 != row2 || column1 != column2)
+                    && board.inGameBoard(row1, column1) && board.fieldEmpty(row1, column1)
                     && board.inGameBoard(row2, column2) && board.fieldEmpty(row2, column2)) {
                 board.setBoardString(row1, column1, player.getName());
                 board.setBoardString(row2, column2, player.getName());
                 player.next();
                 return "OK";
             } else {
-                return "Error, field occupied.";
+                return "Error, field is occupied.";
             }
         } else if (draw && noWin) {
             return "draw";

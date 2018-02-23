@@ -33,7 +33,7 @@ public class GameCore {
      * Get player class
      * @return the player class
      */
-    protected Player getPlayer() {
+    public Player getPlayer() {
         return player;
     }
 }

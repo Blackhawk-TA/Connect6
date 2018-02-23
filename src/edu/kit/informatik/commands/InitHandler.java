@@ -28,7 +28,7 @@ public class InitHandler {
             GameCore core = new GameCore();
             core.setup(gameType, boardSize, playerNum);
 
-            InputHandler handler = new InputHandler(core.getBoard());
+            InputHandler handler = new InputHandler(core.getBoard(), core.getPlayer());
             handler.inputs(args);
         } else {
             Terminal.printError("invalid start parameters.");

@@ -4,6 +4,7 @@ import edu.kit.informatik.formatter.FormatType;
 import edu.kit.informatik.game.Board;
 import edu.kit.informatik.game.GameCore;
 
+import edu.kit.informatik.game.Player;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -27,6 +28,7 @@ public class CommandHandlerTest {
 
     private GameCore core;
     private Board board;
+    private Player player;
     private CommandHandler handler;
 
     @Before
@@ -34,7 +36,8 @@ public class CommandHandlerTest {
         core = new GameCore();
         core.setup("standard", 20, 4);
         board = core.getBoard();
-        handler = new CommandHandler(board);
+        player = core.getPlayer();
+        handler = new CommandHandler(board, player);
     }
 
     @After
@@ -42,6 +45,7 @@ public class CommandHandlerTest {
         core = null;
         board = null;
         handler = null;
+        player = null;
     }
 
     @Test

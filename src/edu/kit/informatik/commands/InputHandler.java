@@ -3,15 +3,17 @@ package edu.kit.informatik.commands;
 import edu.kit.informatik.Terminal;
 import edu.kit.informatik.game.Board;
 import edu.kit.informatik.formatter.*;
+import edu.kit.informatik.game.Player;
 
 public class InputHandler extends CommandHandler {
 
     /**
      * InputHandler constructor
      * @param board the game board
+     * @param player the player
      */
-    InputHandler(Board board) {
-        super(board);
+    InputHandler(Board board, Player player) {
+        super(board, player);
     }
 
     /**
@@ -35,6 +37,7 @@ public class InputHandler extends CommandHandler {
                     Terminal.printLine(super.print());
                 }
                 else if (arg.matches("reset") && regex.hasParam(groups, 0)) {
+                    running = false;
                     Terminal.printLine(super.reset(args));
                 }
                 else if (arg.matches("rowprint") && regex.hasParam(groups, 1)) {

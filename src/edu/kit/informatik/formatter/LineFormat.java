@@ -63,8 +63,8 @@ public class LineFormat extends GameCore {
                 }
             }
         } else {
-            for (int i = rows; i > 0; i--) {
-                for (int j = columns; j > 0; j--) {
+            for (int i = rows - 1; i > 0; i--) {
+                for (int j = columns - 1; j > 0; j--) {
                     diagonalLines[i] = board.getBoardString()[i][j];
                 }
             }

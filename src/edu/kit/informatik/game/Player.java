@@ -17,7 +17,7 @@ public class Player {
      * Switches to the next player
      */
     public void next() {
-        if (id < amount)
+        if (id < amount - 1)
             id++;
         else
             id = 0;
