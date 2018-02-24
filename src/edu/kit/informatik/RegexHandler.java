@@ -1,8 +1,8 @@
-package edu.kit.informatik.commands;
+package edu.kit.informatik;
 
 import java.util.regex.*;
 
-public class CommandRegex {
+public class RegexHandler {
     private int groupMod; //Group modifier for input parameters
     private int groupNum; //Amount of expected groups in a regex
     private Pattern pattern;
@@ -11,7 +11,7 @@ public class CommandRegex {
      * Regex Constructor
      * @param mode the regex mode, "init" for start param check, "command" for input check, "winCheck" for win check.
      */
-    public CommandRegex(String mode) {
+    public RegexHandler(String mode) {
         switch (mode) {
             case "init":
                 pattern = Pattern.compile("^(standard|torus)\\s(18|20)\\s([2-4])$"); //pattern for init param
@@ -24,7 +24,8 @@ public class CommandRegex {
                 groupNum = 7;
                 break;
             case "winCheck":
-                pattern = Pattern.compile("^([*]{2}\\s)*((P1\\s){6}|(P2\\s){6}|(P3\\s){6}|(P4\\s){6})([*]{2}\\s)*$");
+                pattern = Pattern.compile(
+                        "^([*]{2}\\s|P[1-4]\\s)*((P1\\s){6}|(P2\\s){6}|(P3\\s){6}|(P4\\s){6})([*]{2}\\s|P[1-4]\\s)*$");
                 groupMod = 4; //when input is a winCheck, param which shows who won starts at 4
                 groupNum = 8;
                 break;

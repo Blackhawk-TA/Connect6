@@ -1,5 +1,6 @@
 package edu.kit.informatik.commands;
 
+import edu.kit.informatik.RegexHandler;
 import edu.kit.informatik.game.GameCore;
 import edu.kit.informatik.Terminal;
 
@@ -17,7 +18,7 @@ public class InitHandler {
         String input = argsFormatted.toString();
 
         //Check regex
-        CommandRegex regex = new CommandRegex("init");
+        RegexHandler regex = new RegexHandler("init");
         String[] groups = regex.createGroups(input);
 
         if (regex.hasParam(groups, 3)) {

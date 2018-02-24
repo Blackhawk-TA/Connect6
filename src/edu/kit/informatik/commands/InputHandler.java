@@ -1,5 +1,6 @@
 package edu.kit.informatik.commands;
 
+import edu.kit.informatik.RegexHandler;
 import edu.kit.informatik.Terminal;
 import edu.kit.informatik.game.Board;
 import edu.kit.informatik.formatter.*;
@@ -20,8 +21,8 @@ public class InputHandler extends CommandHandler {
      * Handles all console commands
      * @param args the start parameters
      */
-    public void inputs(String[] args) {
-        CommandRegex regex = new CommandRegex("command"); //Group arg inputs start at index 3
+    void inputs(String[] args) {
+        RegexHandler regex = new RegexHandler("command"); //Group arg inputs start at index 3
         boolean running = true;
 
         while (running) {
@@ -38,7 +39,8 @@ public class InputHandler extends CommandHandler {
                 }
                 else if (arg.matches("reset") && regex.hasParam(groups, 0)) {
                     running = false;
-                    Terminal.printLine(super.reset(args));
+                    Terminal.printLine("OK");
+                    super.reset(args);
                 }
                 else if (arg.matches("rowprint") && regex.hasParam(groups, 1)) {
                     Terminal.printLine(super.linePrint(regex.getParam(groups, 0), FormatType.ROW));

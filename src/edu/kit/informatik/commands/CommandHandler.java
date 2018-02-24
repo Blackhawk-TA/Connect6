@@ -4,7 +4,6 @@ import edu.kit.informatik.formatter.*;
 import edu.kit.informatik.game.Board;
 import edu.kit.informatik.game.GameCore;
 import edu.kit.informatik.game.Player;
-import edu.kit.informatik.game.WinValidator;
 
 class CommandHandler extends GameCore {
     private Board board;
@@ -48,12 +47,10 @@ class CommandHandler extends GameCore {
     /**
      * Reset the game with the already chosen start parameters
      * @param args the start parameters
-     * @return OK when successful
      */
-    String reset(String[] args) {
+    void reset(String[] args) {
         InitHandler handler = new InitHandler();
         handler.init(args);
-        return "OK"; //TODO returns "OK" after only after quit and not after setup because init runs the whole time...
     }
 
     /**
@@ -75,13 +72,9 @@ class CommandHandler extends GameCore {
      * @return Status after placing (valid, invalid, game over)
      */
     String placeAt(int row1, int column1, int row2, int column2) {
-        System.out.println("ok " + player);
-        WinValidator validator = new WinValidator();
-        boolean draw = validator.checkDraw(board);
-        String winner = validator.checkWin(board);
+        boolean draw = WinValidator.checkDraw(board); //TODO at wrong pos
+        String winner = WinValidator.checkWin(board, row1, column1); //TODO wrong pos and needed twice
         boolean noWin = winner.isEmpty();
-        boolean valid1 = false;
-        boolean valid2 = false;
 
         if (!draw && noWin) {
             if ((row1 != row2 || column1 != column2)

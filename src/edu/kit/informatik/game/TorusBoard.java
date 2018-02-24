@@ -5,7 +5,7 @@ public class TorusBoard extends Board {
      * @param rows amount of rows the board should have
      * @param columns amount of columns the board should have
      */
-    public TorusBoard(int rows, int columns) {
+    TorusBoard(int rows, int columns) {
         super(rows, columns);
     }
 
