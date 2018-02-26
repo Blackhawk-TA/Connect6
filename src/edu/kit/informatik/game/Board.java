@@ -1,9 +1,9 @@
 package edu.kit.informatik.game;
 
 public class Board {
-    private String[][] board;
-    private int rows;
-    private int columns;
+    private final String[][] board;
+    private final int rows;
+    private final int columns;
 
     /**
      * @param rows amount of rows the board should have

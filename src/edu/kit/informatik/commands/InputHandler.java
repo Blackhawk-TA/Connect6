@@ -6,7 +6,7 @@ import edu.kit.informatik.game.Board;
 import edu.kit.informatik.formatter.*;
 import edu.kit.informatik.game.Player;
 
-public class InputHandler extends CommandHandler {
+class InputHandler extends CommandHandler {
 
     /**
      * InputHandler constructor

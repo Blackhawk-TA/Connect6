@@ -6,12 +6,13 @@ import edu.kit.informatik.game.GameCore;
 import edu.kit.informatik.game.Player;
 
 class CommandHandler extends GameCore {
-    private Board board;
-    private Player player;
+    private final Board board;
+    private final Player player;
 
     /**
      * CommandHandler constructor
      * @param board the game board
+     * @param player the player object
      */
     CommandHandler(Board board, Player player) {
         this.board = board;

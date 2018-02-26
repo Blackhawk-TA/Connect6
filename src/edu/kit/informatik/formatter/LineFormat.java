@@ -4,7 +4,7 @@ import edu.kit.informatik.game.Board;
 import edu.kit.informatik.game.GameCore;
 
 public class LineFormat extends GameCore {
-    private Board board;
+    private final Board board;
 
     /**
      * LineFormat constructor

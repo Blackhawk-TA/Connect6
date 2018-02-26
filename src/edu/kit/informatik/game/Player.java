@@ -2,7 +2,7 @@ package edu.kit.informatik.game;
 
 public class Player {
     private int id;
-    private int amount;
+    private final int amount;
 
     /**
      * Player constructor
