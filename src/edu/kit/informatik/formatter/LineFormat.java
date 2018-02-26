@@ -16,7 +16,7 @@ public class LineFormat extends GameCore {
 
     /**
      * Formats either row or column depending on type to a String
-     * @param n number of the row/column to print
+     * @param n index of the row/column to print
      * @param type defines if print mode is row or column
      * @return board row/column as String
      */
@@ -32,43 +32,44 @@ public class LineFormat extends GameCore {
     }
 
     /**
-     * Gets all rows/columns depending on type input
-     * @param n amount of lines to get
-     * @param type format enum type, ROW for get rows, COLUMN for get columns
-     * @return array of all rows/columns as formatted String
-     */
-    public String[] getLines(int n, FormatType type) {
-        String[] lines = new String[n];
-        for (int i = 0; i < n; i++) {
-            lines[i] = toLine(i, type);
-        }
-        return lines;
-    }
-
-    /**
      * Convert the diagonals to normal lines to check winner
-     * @param board the game board
+     * @param row the row of the field
+     * @param column the column of the field
      * @param type the type of diagonals, DIAGLB for bottom left to top right, DIAGLT for top left to bottom right
      * @return the diagonals as line
      */
-    public String[] getDiagLines(Board board, FormatType type) {
-        int rows = board.getRows();
-        int columns = board.getColumns();
-        String[] diagonalLines = new String[rows];
+    public String getDiagonalLine(int row, int column, FormatType type) {
+        StringBuilder diagonalLine = new StringBuilder();
+        int modRow = row;
+        int modCol = column;
 
-        if (type == FormatType.DIAG_BOTTOMLEFT) {
-            for (int i = 0; i < rows; i++) {
-                for (int j = 0; j < columns; j++) {
-                    diagonalLines[i] = board.getBoardString()[i][j];
-                }
+        if (type == FormatType.DIAG_TOPLEFT) {
+            while (modCol > 0) {
+                modCol--;
+                if (modRow > 0)
+                    modRow--;
+            }
+
+            for (int i = 0; i < board.getRows() - 1; i++) {
+                diagonalLine.append(board.getBoardString()[modRow][modCol]);
+                modCol++;
+                if (modRow < board.getRows() - 1)
+                    modRow++;
             }
         } else {
-            for (int i = rows - 1; i > 0; i--) {
-                for (int j = columns - 1; j > 0; j--) {
-                    diagonalLines[i] = board.getBoardString()[i][j];
-                }
+            while (modCol < board.getColumns() - 1) {
+                modCol++;
+                if (modRow < board.getRows() - 1)
+                    modRow++;
+            }
+
+            for (int i = board.getRows() - 1; i > 0; i--) {
+                diagonalLine.append(board.getBoardString()[modRow][modCol]);
+                modCol--;
+                if (modRow > 0)
+                    modRow--;
             }
         }
-        return diagonalLines;
+        return diagonalLine.toString();
     }
 }

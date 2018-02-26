@@ -35,23 +35,23 @@ public class WinValidator {
         LineFormat format = new LineFormat(board);
         String horizontal = format.toLine(row, FormatType.ROW);
         String vertical = format.toLine(column, FormatType.COLUMN);
-//        String diagLB = format.toLine(board, FormatType.DIAG_BOTTOMLEFT);
-//        String diagLT = format.toLine(board, FormatType.DIAG_TOPLEFT);
+        String diagLB = format.getDiagonalLine(row, column, FormatType.DIAG_BOTTOMLEFT);
+        String diagLT = format.getDiagonalLine(row, column, FormatType.DIAG_TOPLEFT);
 
         String horizontalWin = regexWinCheck(horizontal);
         String verticalWin = regexWinCheck(vertical);
-//        String diagLBWin = regexWinCheck(diagLB);
-//        String diagLTWin = regexWinCheck(diagLT);
+        String diagLBWin = regexWinCheck(diagLB);
+        String diagLTWin = regexWinCheck(diagLT);
 
         //Check for win
         if (!horizontalWin.isEmpty()) {
             return horizontalWin;
         } else if (!verticalWin.isEmpty()) {
             return verticalWin;
-//        } else if (!diagLBWin.isEmpty()) {
-//            return diagLBWin;
-//        } else if (!diagLTWin.isEmpty()) {
-//            return diagLTWin;
+        } else if (!diagLBWin.isEmpty()) {
+            return diagLBWin;
+        } else if (!diagLTWin.isEmpty()) {
+            return diagLTWin;
         } else {
             return ""; //no winner
         }
@@ -65,8 +65,8 @@ public class WinValidator {
     private static String regexWinCheck(String line) {
         RegexHandler regex = new RegexHandler("command"); //Group arg inputs start at index 3
         String[] groups = regex.createGroups(line);
-        if (regex.hasParam(groups, 1)) {
-            return groups[6]; //The regex group index to get the player who won
+        if (regex.hasParam(groups, 1)) { //TODO switch case for 1-4 maybe
+            return groups[1]; //The regex group index to get the player who won
         }
         return ""; //no winner
     }

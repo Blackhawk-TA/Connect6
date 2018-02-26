@@ -72,25 +72,30 @@ class CommandHandler extends GameCore {
      * @return Status after placing (valid, invalid, game over)
      */
     String placeAt(int row1, int column1, int row2, int column2) {
-        boolean draw = WinValidator.checkDraw(board); //TODO at wrong pos
-        String winner = WinValidator.checkWin(board, row1, column1); //TODO wrong pos and needed twice
-        boolean noWin = winner.isEmpty();
+        boolean draw;
+        String winner1;
+        String winner2;
 
-        if (!draw && noWin) {
-            if ((row1 != row2 || column1 != column2)
-                    && board.inGameBoard(row1, column1) && board.fieldEmpty(row1, column1)
-                    && board.inGameBoard(row2, column2) && board.fieldEmpty(row2, column2)) {
-                board.setBoardString(row1, column1, player.getName());
-                board.setBoardString(row2, column2, player.getName());
-                player.next();
-                return "OK";
-            } else {
-                return "Error, field is occupied.";
-            }
-        } else if (draw && noWin) {
+        if ((row1 != row2 || column1 != column2)
+                && board.inGameBoard(row1, column1) && board.fieldEmpty(row1, column1)
+                && board.inGameBoard(row2, column2) && board.fieldEmpty(row2, column2)) {
+            board.setBoardString(row1, column1, player.getName());
+            board.setBoardString(row2, column2, player.getName());
+
+            draw = WinValidator.checkDraw(board);
+            winner1 = WinValidator.checkWin(board, row1, column1);
+            winner2 = WinValidator.checkWin(board, row2, column2);
+        } else {
+            return "Error, field is occupied.";
+        }
+
+        if (!draw && winner1.isEmpty() && winner2.isEmpty()) {
+            player.next();
+            return "OK";
+        } else if (draw && winner1.isEmpty() && winner2.isEmpty()) {
             return "draw";
         } else {
-            return winner + "wins";
+            return player.getName() + "wins";
         }
     }
 }
