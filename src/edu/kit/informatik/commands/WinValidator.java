@@ -62,11 +62,13 @@ public class WinValidator {
      * @param line horizontal or vertical line depending on input
      * @return empty String if no winner, else return winner
      */
-    private static String regexWinCheck(String line) {
-        RegexHandler regex = new RegexHandler("command"); //Group arg inputs start at index 3
+    public static String regexWinCheck(String line) { //TODO change to private
+        RegexHandler regex = new RegexHandler("winCheck");
         String[] groups = regex.createGroups(line);
-        if (regex.hasParam(groups, 1)) { //TODO switch case for 1-4 maybe
-            return groups[1]; //The regex group index to get the player who won
+        for (int i = groups.length - 1; i > 1; i--) {
+            if (groups[i] != null && !groups[i].isEmpty()) {
+                return groups[i];
+            }
         }
         return ""; //no winner
     }

@@ -25,7 +25,7 @@ public class RegexHandler {
                 break;
             case "winCheck":
                 pattern = Pattern.compile("((P1\\s){6}|(P2\\s){6}|(P3\\s){6}|(P4\\s){6})");
-                groupMod = 4; //when input is a winCheck, param which shows who won starts at 4
+                groupMod = 0; //not required for this check
                 groupNum = 6;
                 break;
             default:
