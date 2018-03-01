@@ -5,34 +5,21 @@ import edu.kit.informatik.game.Board;
 import edu.kit.informatik.game.GameCore;
 
 import edu.kit.informatik.game.Player;
-import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.junit.Arquillian;
-import org.jboss.shrinkwrap.api.ShrinkWrap;
-import org.jboss.shrinkwrap.api.asset.EmptyAsset;
-import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
 import static org.junit.Assert.*;
 
-@RunWith(Arquillian.class)
-public class CommandHandlerTest {
-    @Deployment
-    public static JavaArchive createDeployment() {
-        return ShrinkWrap.create(JavaArchive.class)
-                .addClass(CommandHandler.class)
-                .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
-    }
 
+public class CommandHandlerTest {
     private GameCore core;
     private Board board;
     private Player player;
     private CommandHandler handler;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         core = new GameCore();
         core.setup("standard", 20, 4);
         board = core.getBoard();
@@ -41,7 +28,7 @@ public class CommandHandlerTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         core = null;
         board = null;
         handler = null;
