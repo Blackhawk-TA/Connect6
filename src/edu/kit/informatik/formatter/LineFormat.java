@@ -24,9 +24,9 @@ public class LineFormat extends GameCore {
         StringBuilder boardFormatted = new StringBuilder();
         for (int i = 0; i < board.getBoardString().length; i++) {
             if (type == FormatType.ROW)
-                boardFormatted.append(board.getBoardString()[n][i]);
+                boardFormatted.append(board.getBoardString(n, i));
             else if (type == FormatType.COLUMN)
-                boardFormatted.append(board.getBoardString()[i][n]);
+                boardFormatted.append(board.getBoardString(n, i));
         }
         return boardFormatted.toString();
     }
@@ -51,7 +51,7 @@ public class LineFormat extends GameCore {
             }
 
             for (int i = 0; i < board.getRows() - 1; i++) {
-                diagonalLine.append(board.getBoardString()[modRow][modCol]);
+                diagonalLine.append(board.getBoardString(modRow, modCol));
                 modCol++;
                 if (modRow < board.getRows() - 1)
                     modRow++;
@@ -64,7 +64,7 @@ public class LineFormat extends GameCore {
             }
 
             for (int i = board.getRows() - 1; i > 0; i--) {
-                diagonalLine.append(board.getBoardString()[modRow][modCol]);
+                diagonalLine.append(board.getBoardString(modRow, modCol));
                 modCol--;
                 if (modRow > 0)
                     modRow--;

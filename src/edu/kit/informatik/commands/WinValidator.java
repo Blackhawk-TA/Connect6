@@ -16,7 +16,7 @@ public class WinValidator {
 
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
-                if (board.getBoardString()[i][j].equals("** ")) {
+                if (board.getBoardString(i, j).equals("** ")) {
                     return false;
                 }
             }

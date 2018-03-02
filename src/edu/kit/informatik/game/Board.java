@@ -47,6 +47,16 @@ public class Board {
     }
 
     /**
+     * Get the board state as String
+     * @param row the row to get
+     * @param column the column to get
+     * @return get the board state as String
+     */
+    public String getBoardString(int row, int column) {
+        return board[row][column];
+    }
+
+    /**
      * Add a player to a specific field
      * @param row the row where to place the player
      * @param column the column where to place the player

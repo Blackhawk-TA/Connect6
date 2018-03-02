@@ -27,7 +27,7 @@ class CommandHandler extends GameCore {
         StringBuilder boardFormatted = new StringBuilder();
         for (int i = 0; i < board.getRows(); i++) {
             for (int j = 0; j < board.getColumns(); j++) {
-                boardFormatted.append(board.getBoardString()[i][j]);
+                boardFormatted.append(board.getBoardString(i, j));
             }
             boardFormatted.append("\n");
         }
@@ -61,7 +61,7 @@ class CommandHandler extends GameCore {
      * @return registered entry at requested field
      */
     String stateOf(int row, int column) {
-        return board.getBoardString()[row][column];
+        return board.getBoardString(row, column);
     }
 
     /**
@@ -87,7 +87,7 @@ class CommandHandler extends GameCore {
             winner1 = WinValidator.checkWin(board, row1, column1);
             winner2 = WinValidator.checkWin(board, row2, column2);
         } else {
-            return "Error, field is occupied.";
+            return "Error, at least one field doesn't exist or is already occupied.";
         }
 
         if (!draw && winner1.isEmpty() && winner2.isEmpty()) {

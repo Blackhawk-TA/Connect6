@@ -19,7 +19,7 @@ public class RegexHandler {
                 groupNum = 4;
                 break;
             case "command":
-                pattern = Pattern.compile("^([a-z]+)(\\s)?(\\d*)?;?(\\d*)?;?(\\d*)?;?(\\d*)$"); //pattern for normal cmd
+                pattern = Pattern.compile("^([a-z]+)(\\s)?(-?\\d*)?;?(-?\\d*)?;?(-?\\d*)?;?(-?\\d*)$"); //for normal cmd
                 groupMod = 3; //when input is a normal command like "print" or "place 5;5;5;5", params start at index 3
                 groupNum = 7;
                 break;
