@@ -3,16 +3,15 @@ package edu.kit.informatik.commands;
 import edu.kit.informatik.formatter.FormatType;
 import edu.kit.informatik.game.Board;
 import edu.kit.informatik.game.GameCore;
-
 import edu.kit.informatik.game.Player;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 
-public class CommandHandlerTest {
+public class CommandHandlerSTest {
     private GameCore core;
     private Board board;
     private Player player;
@@ -21,7 +20,7 @@ public class CommandHandlerTest {
     @Before
     public void setUp() {
         core = new GameCore();
-        core.setup("standard", 20, 4);
+        core.setup("standard", 20, 2);
         board = core.getBoard();
         player = core.getPlayer();
         handler = new CommandHandler(board, player);
@@ -41,11 +40,6 @@ public class CommandHandlerTest {
 
     @Test
     public void linePrint() {
-        String exOut = "** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ";
-        String out1 = handler.linePrint(0, FormatType.ROW);
-        String out2 = handler.linePrint(0, FormatType.COLUMN);
-        assertEquals("Row correct", exOut, out1);
-        assertEquals("Column correct", exOut, out2);
     }
 
     @Test
@@ -57,6 +51,10 @@ public class CommandHandlerTest {
     }
 
     @Test
-    public void placeAt() {
+    public void horizontalTorus() {
+    }
+
+    public void verticalTorus() {
+
     }
 }

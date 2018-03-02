@@ -1,5 +1,10 @@
 package edu.kit.informatik.game;
 
+import edu.kit.informatik.formatter.FormatType;
+import edu.kit.informatik.formatter.LineFormat;
+
+import java.util.List;
+
 public class TorusBoard extends Board {
     /**
      * @param rows amount of rows the board should have
@@ -70,5 +75,30 @@ public class TorusBoard extends Board {
         } else {
             return n % this.getRows();
         }
+    }
+
+    /**
+     * Win check for torus board horizontal and vertical
+     * @param line the horizontal or vertical line
+     * @return the torus line
+     */
+    public String lineCheck(String line) {
+        return line + line;
+    }
+
+    /**
+     * Win check for torus board diagonal lines
+     * @param diagonal the initial diagonal
+     * @param type diagonal type (bottom left to top right or top left to bottom right)
+     * @return the torus line for win check
+     */
+    public String diagonalCheck(int row, int column, String diagonal, FormatType type) {
+        LineFormat format = new LineFormat(this);
+        StringBuilder torusDiagonal = new StringBuilder();
+        String lastDiagonal;
+        String nextDiagonal;
+        String[][] board = this.getBoardString();
+
+        return "";
     }
 }

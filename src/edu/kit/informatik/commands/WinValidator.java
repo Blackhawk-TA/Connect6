@@ -3,6 +3,7 @@ package edu.kit.informatik.commands;
 import edu.kit.informatik.RegexHandler;
 import edu.kit.informatik.formatter.*;
 import edu.kit.informatik.game.Board;
+import edu.kit.informatik.game.TorusBoard;
 
 public class WinValidator {
     /**
@@ -37,6 +38,13 @@ public class WinValidator {
         String vertical = format.toLine(column, FormatType.COLUMN);
         String diagLB = format.getDiagonalLine(row, column, FormatType.DIAG_BOTTOMLEFT);
         String diagLT = format.getDiagonalLine(row, column, FormatType.DIAG_TOPLEFT);
+
+        if (board instanceof TorusBoard) {
+            horizontal = ((TorusBoard) board).lineCheck(horizontal);
+            vertical = ((TorusBoard) board).lineCheck(vertical);
+            System.out.println("H " + horizontal);
+            System.out.println("V " + vertical);
+        }
 
         String horizontalWin = regexWinCheck(horizontal);
         String verticalWin = regexWinCheck(vertical);

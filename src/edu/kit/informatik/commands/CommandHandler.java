@@ -8,6 +8,7 @@ import edu.kit.informatik.game.Player;
 class CommandHandler extends GameCore {
     private final Board board;
     private final Player player;
+    private boolean gameOver = false;
 
     /**
      * CommandHandler constructor
@@ -50,6 +51,7 @@ class CommandHandler extends GameCore {
      * @param args the start parameters
      */
     void reset(String[] args) {
+        gameOver = false;
         InitHandler handler = new InitHandler();
         handler.init(args);
     }
@@ -77,26 +79,32 @@ class CommandHandler extends GameCore {
         String winner1;
         String winner2;
 
-        if ((row1 != row2 || column1 != column2)
-                && board.inGameBoard(row1, column1) && board.fieldEmpty(row1, column1)
-                && board.inGameBoard(row2, column2) && board.fieldEmpty(row2, column2)) {
-            board.setBoardString(row1, column1, player.getName());
-            board.setBoardString(row2, column2, player.getName());
+        if (!gameOver) {
+            if ((row1 != row2 || column1 != column2)
+                    && board.inGameBoard(row1, column1) && board.fieldEmpty(row1, column1)
+                    && board.inGameBoard(row2, column2) && board.fieldEmpty(row2, column2)) {
+                board.setBoardString(row1, column1, player.getName());
+                board.setBoardString(row2, column2, player.getName());
 
-            draw = WinValidator.checkDraw(board);
-            winner1 = WinValidator.checkWin(board, row1, column1);
-            winner2 = WinValidator.checkWin(board, row2, column2);
-        } else {
-            return "Error, at least one field doesn't exist or is already occupied.";
-        }
+                draw = WinValidator.checkDraw(board);
+                winner1 = WinValidator.checkWin(board, row1, column1);
+                winner2 = WinValidator.checkWin(board, row2, column2);
+            } else {
+                return "Error, at least one field doesn't exist or is already occupied.";
+            }
 
-        if (!draw && winner1.isEmpty() && winner2.isEmpty()) {
-            player.next();
-            return "OK";
-        } else if (draw && winner1.isEmpty() && winner2.isEmpty()) {
-            return "draw";
+            if (!draw && winner1.isEmpty() && winner2.isEmpty()) {
+                player.next();
+                return "OK";
+            } else if (draw && winner1.isEmpty() && winner2.isEmpty()) {
+                gameOver = true;
+                return "draw";
+            } else {
+                gameOver = true;
+                return player.getName() + "wins";
+            }
         } else {
-            return player.getName() + "wins";
+            return "Error, the game is already over.";
         }
     }
 }
