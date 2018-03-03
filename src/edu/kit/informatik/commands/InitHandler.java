@@ -13,7 +13,7 @@ public class InitHandler {
         //Format String array to normal String
         StringBuilder argsFormatted = new StringBuilder();
         for (String arg: args) {
-            argsFormatted.append(arg + " ");
+            argsFormatted.append(arg).append(" ");
         }
         String input = argsFormatted.toString().trim();
 
