@@ -1,5 +1,6 @@
 package edu.kit.informatik.game;
 
+import com.sun.corba.se.impl.activation.CommandHandler;
 import edu.kit.informatik.commands.WinValidator;
 import org.junit.After;
 import org.junit.Before;
@@ -10,22 +11,47 @@ import static org.junit.Assert.*;
 
 public class WinValidatorTest {
     private Board board;
-    private Player player;
 
     @Before
     public void setUp() {
         board = new Board(18, 18);
-        player = new Player(4);
     }
 
     @After
     public void tearDown() {
         board = null;
-        player = null;
     }
 
     @Test
     public void checkDraw() {
+        String[][] ex = {
+            {"P1 ","P1 ","P1 ","P1 ","P1 ","P2 ","P2 ","P2 ","P2 ","P2 ","P3 ","P3 ","P3 ","P3 ","P3 ","P4 ","P4 ","P4 "},
+            {"P3 ","P3 ","P3 ","P3 ","P3 ","P4 ","P4 ","P4 ","P4 ","P4 ","P1 ","P1 ","P1 ","P1 ","P1 ","P2 ","P2 ","P2 "},
+            {"P1 ","P1 ","P1 ","P1 ","P1 ","P2 ","P2 ","P2 ","P2 ","P2 ","P3 ","P3 ","P3 ","P3 ","P3 ","P4 ","P4 ","P4 "},
+            {"P3 ","P3 ","P3 ","P3 ","P3 ","P4 ","P4 ","P4 ","P4 ","P4 ","P1 ","P1 ","P1 ","P1 ","P1 ","P2 ","P2 ","P2 "},
+            {"P1 ","P1 ","P1 ","P1 ","P1 ","P2 ","P2 ","P2 ","P2 ","P2 ","P3 ","P3 ","P3 ","P3 ","P3 ","P4 ","P4 ","P4 "},
+            {"P3 ","P3 ","P3 ","P3 ","P3 ","P4 ","P4 ","P4 ","P4 ","P4 ","P1 ","P1 ","P1 ","P1 ","P1 ","P2 ","P2 ","P2 "},
+            {"P1 ","P1 ","P1 ","P1 ","P1 ","P2 ","P2 ","P2 ","P2 ","P2 ","P3 ","P3 ","P3 ","P3 ","P3 ","P4 ","P4 ","P4 "},
+            {"P3 ","P3 ","P3 ","P3 ","P3 ","P4 ","P4 ","P4 ","P4 ","P4 ","P1 ","P1 ","P1 ","P1 ","P1 ","P2 ","P2 ","P2 "},
+            {"P1 ","P1 ","P1 ","P1 ","P1 ","P2 ","P2 ","P2 ","P2 ","P2 ","P3 ","P3 ","P3 ","P3 ","P3 ","P4 ","P4 ","P4 "},
+            {"P3 ","P3 ","P3 ","P3 ","P3 ","P4 ","P4 ","P4 ","P4 ","P4 ","P1 ","P1 ","P1 ","P1 ","P1 ","P2 ","P2 ","P2 "},
+            {"P1 ","P1 ","P1 ","P1 ","P1 ","P2 ","P2 ","P2 ","P2 ","P2 ","P3 ","P3 ","P3 ","P3 ","P3 ","P4 ","P4 ","P4 "},
+            {"P3 ","P3 ","P3 ","P3 ","P3 ","P4 ","P4 ","P4 ","P4 ","P4 ","P1 ","P1 ","P1 ","P1 ","P1 ","P2 ","P2 ","P2 "},
+            {"P1 ","P1 ","P1 ","P1 ","P1 ","P2 ","P2 ","P2 ","P2 ","P2 ","P3 ","P3 ","P3 ","P3 ","P3 ","P4 ","P4 ","P4 "},
+            {"P3 ","P3 ","P3 ","P3 ","P3 ","P4 ","P4 ","P4 ","P4 ","P4 ","P1 ","P1 ","P1 ","P1 ","P1 ","P2 ","P2 ","P2 "},
+            {"P1 ","P1 ","P1 ","P1 ","P1 ","P2 ","P2 ","P2 ","P2 ","P2 ","P3 ","P3 ","P3 ","P3 ","P3 ","P4 ","P4 ","P4 "},
+            {"P3 ","P3 ","P3 ","P3 ","P3 ","P4 ","P4 ","P4 ","P4 ","P4 ","P1 ","P1 ","P1 ","P1 ","P1 ","P2 ","P2 ","P2 "},
+            {"P1 ","P1 ","P1 ","P1 ","P1 ","P2 ","P2 ","P2 ","P2 ","P2 ","P3 ","P3 ","P3 ","P3 ","P3 ","P4 ","P4 ","P4 "},
+            {"P3 ","P3 ","P3 ","P3 ","P3 ","P4 ","P4 ","P4 ","P4 ","P4 ","P1 ","P1 ","P1 ","P1 ","P1 ","P2 ","P2 ","P2 "}
+        };
+
+        for (int i = 0; i < board.getRows(); i++) {
+            for (int j = 0; j < board.getColumns(); j++) {
+                board.setBoardString(i, j, ex[i][j]);
+            }
+        }
+
+        assertTrue("Draw", WinValidator.checkDraw(board));
     }
 
     @Test

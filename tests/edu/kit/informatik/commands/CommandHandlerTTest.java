@@ -37,15 +37,11 @@ public class CommandHandlerTTest {
 
     @Test
     public void linePrint() {
-        handler.placeAt(0, 0, 0, 5);
-        String exOut1 = "P1 ** ** ** ** P1 ** ** ** ** ** ** ** ** ** ** ** ** ** ** ";
+        handler.placeAt(0, 0, 0, -5);
+        String exOut1 = "P1 ** ** ** ** ** ** ** ** ** ** ** ** ** ** P1 ** ** ** ** ";
         String exOut2 = "P1 ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ";
         assertEquals("Row correct", exOut1, handler.linePrint(0, FormatType.ROW));
         assertEquals("Column correct", exOut2, handler.linePrint(0, FormatType.COLUMN));
-    }
-
-    @Test
-    public void reset() {
     }
 
     @Test

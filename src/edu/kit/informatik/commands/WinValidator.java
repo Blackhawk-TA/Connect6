@@ -11,7 +11,7 @@ public class WinValidator {
      * @param board the game board
      * @return true when draw, false if not
      */
-    static boolean checkDraw(Board board) {
+    public static boolean checkDraw(Board board) { //TODO remove public
         int rows = board.getRows();
         int columns = board.getColumns();
 
@@ -42,8 +42,6 @@ public class WinValidator {
         if (board instanceof TorusBoard) {
             horizontal = ((TorusBoard) board).lineCheck(horizontal);
             vertical = ((TorusBoard) board).lineCheck(vertical);
-            System.out.println("H " + horizontal);
-            System.out.println("V " + vertical);
         }
 
         String horizontalWin = regexWinCheck(horizontal);

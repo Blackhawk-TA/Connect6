@@ -3,8 +3,8 @@ package edu.kit.informatik.commands;
 import edu.kit.informatik.RegexHandler;
 import edu.kit.informatik.Terminal;
 import edu.kit.informatik.game.Board;
-import edu.kit.informatik.formatter.*;
 import edu.kit.informatik.game.Player;
+import edu.kit.informatik.formatter.*;
 
 class InputHandler extends CommandHandler {
 

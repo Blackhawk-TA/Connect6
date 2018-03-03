@@ -68,7 +68,6 @@ public class RegexHandler {
 
         if (matcher.find()) {
             for (int i = 0; i <= matcher.groupCount(); i++) {
-                System.out.printf("Capture Group Number: %s, Captured Text: '%s'%n", i, matcher.group(i)); //TODO REMOVE
                 groups[i] = matcher.group(i);
             }
         }
