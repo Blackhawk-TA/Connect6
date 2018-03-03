@@ -32,7 +32,7 @@ public class InitHandler {
             InputHandler handler = new InputHandler(core.getBoard(), core.getPlayer());
             handler.inputs(args);
         } else {
-            Terminal.printError("invalid start parameters. One of or more of these is wrong: " + args[0]);
+            Terminal.printError("invalid start parameters.");
         }
     }
 }
