@@ -13,9 +13,9 @@ public class InitHandler {
         //Format String array to normal String
         StringBuilder argsFormatted = new StringBuilder();
         for (String arg: args) {
-            argsFormatted.append(arg);
+            argsFormatted.append(arg + " ");
         }
-        String input = argsFormatted.toString();
+        String input = argsFormatted.toString().trim();
 
         //Check regex
         RegexHandler regex = new RegexHandler("init");
