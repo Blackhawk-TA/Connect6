@@ -13,9 +13,9 @@ public class InitHandler {
         //Format String array to normal String
         StringBuilder argsFormatted = new StringBuilder();
         for (String arg: args) {
-            argsFormatted.append(arg);
+            argsFormatted.append(arg + " ");
         }
-        String input = argsFormatted.toString();
+        String input = argsFormatted.toString().trim();
 
         //Check regex
         RegexHandler regex = new RegexHandler("init");
@@ -32,7 +32,7 @@ public class InitHandler {
             InputHandler handler = new InputHandler(core.getBoard(), core.getPlayer());
             handler.inputs(args);
         } else {
-            Terminal.printError("invalid start parameters.");
+            Terminal.printError("invalid start parameters. One of or more of these is wrong: " + args[0]);
         }
     }
 }
