@@ -36,16 +36,12 @@ public class CommandHandlerTTest {
     }
 
     @Test
-    public void print() {
-    }
-
-    @Test
     public void linePrint() {
-        String exOut = "** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ";
-        String out1 = handler.linePrint(0, FormatType.ROW);
-        String out2 = handler.linePrint(0, FormatType.COLUMN);
-        assertEquals("Row correct", exOut, out1);
-        assertEquals("Column correct", exOut, out2);
+        handler.placeAt(0, 0, 0, 5);
+        String exOut1 = "P1 ** ** ** ** P1 ** ** ** ** ** ** ** ** ** ** ** ** ** ** ";
+        String exOut2 = "P1 ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ";
+        assertEquals("Row correct", exOut1, handler.linePrint(0, FormatType.ROW));
+        assertEquals("Column correct", exOut2, handler.linePrint(0, FormatType.COLUMN));
     }
 
     @Test
@@ -54,6 +50,9 @@ public class CommandHandlerTTest {
 
     @Test
     public void stateOf() {
+        handler.placeAt(-1, -5, 22, 25);
+        assertEquals("State of", "P1 ", handler.stateOf(19,15));
+        assertEquals("State of", "P1 ", handler.stateOf(2,5));
     }
 
     @Test
@@ -82,7 +81,7 @@ public class CommandHandlerTTest {
         assertEquals("Move 3 P1", "OK", handler.placeAt(4, 19, 9, 9));
         assertEquals("Move 3 P2", "OK", handler.placeAt(5, 1, 4, 1));
 
-        assertEquals("Move 4 P1", "P1 wins", handler.placeAt(5, 19, 8, 19));
+        assertEquals("Move 4 P1", "P1 wins", handler.placeAt(19, 19, 8, 19));
         assertEquals("Move 4 P2", "Error, the game is already over.", handler.placeAt(8, 8, 8, 9));
     }
 }

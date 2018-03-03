@@ -26,7 +26,7 @@ public class LineFormat extends GameCore {
             if (type == FormatType.ROW)
                 boardFormatted.append(board.getBoardString(n, i));
             else if (type == FormatType.COLUMN)
-                boardFormatted.append(board.getBoardString(n, i));
+                boardFormatted.append(board.getBoardString(i, n));
         }
         return boardFormatted.toString();
     }

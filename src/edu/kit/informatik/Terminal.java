@@ -17,6 +17,7 @@ import java.io.InputStreamReader;
  * @author  IPD, SDQ Group
  * @version 5.03, 2016/05/07
  */
+@SuppressWarnings("ALL")
 public final class Terminal {
     
     /**
