@@ -1,10 +1,7 @@
 package edu.kit.informatik.commands;
 
 import edu.kit.informatik.formatter.*;
-import edu.kit.informatik.game.Board;
-import edu.kit.informatik.game.GameCore;
-import edu.kit.informatik.game.Player;
-import edu.kit.informatik.game.TorusBoard;
+import edu.kit.informatik.game.*;
 
 class CommandHandler extends GameCore {
     private final Board board;
@@ -80,7 +77,7 @@ class CommandHandler extends GameCore {
         String winner1;
         String winner2;
 
-        //Modified function parameters because they can't be modified due to checkstyle to make readability worse
+        //Modified functions parameters because they can't be modified due to checkstyle, much better
         int row1Mod = row1;
         int col1Mod = column1;
         int row2Mod = row2;
