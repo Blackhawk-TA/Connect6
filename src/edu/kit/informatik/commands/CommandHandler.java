@@ -4,6 +4,7 @@ import edu.kit.informatik.formatter.*;
 import edu.kit.informatik.game.Board;
 import edu.kit.informatik.game.GameCore;
 import edu.kit.informatik.game.Player;
+import edu.kit.informatik.game.TorusBoard;
 
 class CommandHandler extends GameCore {
     private final Board board;
@@ -79,16 +80,29 @@ class CommandHandler extends GameCore {
         String winner1;
         String winner2;
 
+        //Modified function parameters because they can't be modified due to checkstyle to make readability worse
+        int row1Mod = row1;
+        int col1Mod = column1;
+        int row2Mod = row2;
+        int col2Mod = column2;
+
+        if (board instanceof TorusBoard) {
+            row1Mod = ((TorusBoard) board).toTorus(row1Mod);
+            col1Mod = ((TorusBoard) board).toTorus(col1Mod);
+            row2Mod = ((TorusBoard) board).toTorus(row2Mod);
+            col2Mod = ((TorusBoard) board).toTorus(col2Mod);
+        }
+
         if (!gameOver) {
-            if ((row1 != row2 || column1 != column2)
-                    && board.inGameBoard(row1, column1) && board.fieldEmpty(row1, column1)
-                    && board.inGameBoard(row2, column2) && board.fieldEmpty(row2, column2)) {
-                board.setBoardString(row1, column1, player.getName());
-                board.setBoardString(row2, column2, player.getName());
+            if ((row1Mod != row2Mod || col1Mod != col2Mod)
+                    && board.inGameBoard(row1Mod, col1Mod) && board.fieldEmpty(row1Mod, col1Mod)
+                    && board.inGameBoard(row2Mod, col2Mod) && board.fieldEmpty(row2Mod, col2Mod)) {
+                board.setBoardString(row1Mod, col1Mod, player.getName());
+                board.setBoardString(row2Mod, col2Mod, player.getName());
 
                 draw = WinValidator.checkDraw(board);
-                winner1 = WinValidator.checkWin(board, row1, column1);
-                winner2 = WinValidator.checkWin(board, row2, column2);
+                winner1 = WinValidator.checkWin(board, row1Mod, col1Mod);
+                winner2 = WinValidator.checkWin(board, row2Mod, col2Mod);
             } else {
                 return "Error, at least one field doesn't exist or is already occupied.";
             }

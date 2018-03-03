@@ -48,13 +48,38 @@ public class CommandHandlerSTest {
 
     @Test
     public void stateOf() {
+        handler.placeAt(5, 5, 0, 0);
+        assertEquals("State of", "P1 ", handler.stateOf(5,5));
+        assertEquals("State of", "** ", handler.stateOf(1,1));
     }
 
     @Test
-    public void horizontalTorus() {
+    public void horizontal() {
+        assertEquals("Move 1 P1", "OK", handler.placeAt(0, 0, 0, 1));
+        assertEquals("Move 1 P2", "OK", handler.placeAt(1, 1, 2, 1));
+
+        assertEquals("Move 2 P1", "OK", handler.placeAt(0, 2, 0, 3));
+        assertEquals("Move 2 P2", "OK", handler.placeAt(1, 2, 3, 1));
+
+        assertEquals("Move 3 P1", "OK", handler.placeAt(0, 4, 9, 9));
+        assertEquals("Move 3 P2", "OK", handler.placeAt(5, 1, 4, 1));
+
+        assertEquals("Move 4 P1", "P1 wins", handler.placeAt(0, 7, 0, 5));
+        assertEquals("Move 4 P2", "Error, the game is already over.", handler.placeAt(8, 8, 8, 9));
     }
 
-    public void verticalTorus() {
+    @Test
+    public void vertical() {
+        assertEquals("Move 1 P1", "OK", handler.placeAt(0, 19, 1, 19));
+        assertEquals("Move 1 P2", "OK", handler.placeAt(1, 1, 2, 1));
 
+        assertEquals("Move 2 P1", "OK", handler.placeAt(2, 19, 3, 19));
+        assertEquals("Move 2 P2", "OK", handler.placeAt(1, 2, 3, 1));
+
+        assertEquals("Move 3 P1", "OK", handler.placeAt(4, 19, 9, 9));
+        assertEquals("Move 3 P2", "OK", handler.placeAt(5, 1, 4, 1));
+
+        assertEquals("Move 4 P1", "P1 wins", handler.placeAt(5, 19, 9, 19));
+        assertEquals("Move 4 P2", "Error, the game is already over.", handler.placeAt(8, 8, 8, 9));
     }
 }
