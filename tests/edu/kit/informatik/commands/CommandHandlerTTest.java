@@ -125,4 +125,19 @@ public class CommandHandlerTTest {
         assertEquals("Move 4 P1", "P1 wins", handler.placeAt(1, 18, 0, 19));
         assertEquals("Move 4 P2", "Error, the game is already over.", handler.placeAt(8, 8, 8, 9));
     }
+
+    @Test
+    public void  diagonalTest4() {
+        assertEquals("Move 1 P1", "OK", handler.placeAt(3, 19, 4, 18));
+        assertEquals("Move 1 P2", "OK", handler.placeAt(5, 5, 2, 1));
+
+        assertEquals("Move 2 P1", "OK", handler.placeAt(5, 17, 6, 16));
+        assertEquals("Move 2 P2", "OK", handler.placeAt(1, 2, 3, 1));
+
+        assertEquals("Move 3 P1", "OK", handler.placeAt(2, 0, 9, 9));
+        assertEquals("Move 3 P2", "OK", handler.placeAt(5, 1, 4, 2));
+
+        assertEquals("Move 4 P1", "P1 wins", handler.placeAt(1, 1, 0, 19));
+        assertEquals("Move 4 P2", "Error, the game is already over.", handler.placeAt(8, 8, 8, 9));
+    }
 }

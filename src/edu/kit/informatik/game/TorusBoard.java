@@ -59,9 +59,9 @@ public class TorusBoard extends Board {
         Board bigBoard = format.toBigBoard(this);
 
         String check1 = format.getDiagonalLine(bigBoard, row, column, type);
-        String check2 = format.getDiagonalLine(bigBoard, row, column * 2, type);
-        String check3 = format.getDiagonalLine(bigBoard, row * 2, column, type);
-        String check4 = format.getDiagonalLine(bigBoard, row * 2, column * 2, type);
+        String check2 = format.getDiagonalLine(bigBoard, row, column + this.getColumns(), type);
+        String check3 = format.getDiagonalLine(bigBoard, row + this.getRows(), column, type);
+        String check4 = format.getDiagonalLine(bigBoard, row + this.getRows(), column + this.getColumns(), type);
 
         return check1 + check2 + check3 + check4;
     }

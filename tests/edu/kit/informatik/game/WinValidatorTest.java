@@ -7,7 +7,6 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-
 public class WinValidatorTest {
     private Board board;
 
@@ -57,9 +56,7 @@ public class WinValidatorTest {
     public void regexWinCheck() {
         String lineP1 = "** ** P2 P1 P1 P1 P1 P1 P1 ** ** ** ** ** ** ** ** ** ** ** ";
         String lineP4 = "** ** P2 P4 P4 P4 P4 P4 P4 P3 P4 P2 P4 P4 P4 P4 ** ** ** ** ";
-        String out1 = WinValidator.regexWinCheck(lineP1);
-        String out2 = WinValidator.regexWinCheck(lineP4);
-        assertEquals("Regex win check P1", "P1 ", out1);
-        assertEquals("Regex win check P4", "P4 ", out2);
+        assertEquals("Regex win check P1", "P1 ", WinValidator.regexWinCheck(lineP1));
+        assertEquals("Regex win check P4", "P4 ", WinValidator.regexWinCheck(lineP4));
     }
 }
