@@ -36,12 +36,14 @@ public class WinValidator {
         LineFormat format = new LineFormat(board);
         String horizontal = format.toLine(row, FormatType.ROW);
         String vertical = format.toLine(column, FormatType.COLUMN);
-        String diagLB = format.getDiagonalLine(row, column, FormatType.DIAG_BOTTOMLEFT);
-        String diagLT = format.getDiagonalLine(row, column, FormatType.DIAG_TOPLEFT);
+        String diagLB = format.getDiagonalLine(board, row, column, FormatType.DIAG_BOTTOMLEFT);
+        String diagLT = format.getDiagonalLine(board, row, column, FormatType.DIAG_TOPLEFT);
 
         if (board instanceof TorusBoard) {
             horizontal = ((TorusBoard) board).lineCheck(horizontal);
             vertical = ((TorusBoard) board).lineCheck(vertical);
+            diagLB = ((TorusBoard) board).diagonalCheck(row, column, FormatType.DIAG_BOTTOMLEFT);
+            diagLT = ((TorusBoard) board).diagonalCheck(row, column, FormatType.DIAG_TOPLEFT);
         }
 
         String horizontalWin = regexWinCheck(horizontal);

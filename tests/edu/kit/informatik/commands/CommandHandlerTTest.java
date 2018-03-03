@@ -46,7 +46,7 @@ public class CommandHandlerTTest {
 
     @Test
     public void stateOf() {
-        handler.placeAt(-1, -5, 22, 25);
+        assertEquals("Place", "OK", handler.placeAt(-1, -5, 22, 25));
         assertEquals("State of", "P1 ", handler.stateOf(19,15));
         assertEquals("State of", "P1 ", handler.stateOf(2,5));
     }
@@ -78,6 +78,51 @@ public class CommandHandlerTTest {
         assertEquals("Move 3 P2", "OK", handler.placeAt(5, 1, 4, 1));
 
         assertEquals("Move 4 P1", "P1 wins", handler.placeAt(19, 19, 8, 19));
+        assertEquals("Move 4 P2", "Error, the game is already over.", handler.placeAt(8, 8, 8, 9));
+    }
+
+    @Test
+    public void diagonalTest1() {
+        assertEquals("Move 1 P1", "OK", handler.placeAt(0, 0, 1, 1));
+        assertEquals("Move 1 P2", "OK", handler.placeAt(5, 5, 2, 1));
+
+        assertEquals("Move 2 P1", "OK", handler.placeAt(2, 2, 3, 3));
+        assertEquals("Move 2 P2", "OK", handler.placeAt(1, 2, 3, 1));
+
+        assertEquals("Move 3 P1", "OK", handler.placeAt(19, 19, 9, 9));
+        assertEquals("Move 3 P2", "OK", handler.placeAt(5, 1, 4, 1));
+
+        assertEquals("Move 4 P1", "P1 wins", handler.placeAt(18, 18, 0, 19));
+        assertEquals("Move 4 P2", "Error, the game is already over.", handler.placeAt(8, 8, 8, 9));
+    }
+
+    @Test
+    public void  diagonalTest2() {
+        assertEquals("Move 1 P1", "OK", handler.placeAt(0, 19, 1, 18));
+        assertEquals("Move 1 P2", "OK", handler.placeAt(5, 5, 2, 1));
+
+        assertEquals("Move 2 P1", "OK", handler.placeAt(2, 17, 3, 16));
+        assertEquals("Move 2 P2", "OK", handler.placeAt(1, 2, 3, 1));
+
+        assertEquals("Move 3 P1", "OK", handler.placeAt(4, 15, 9, 9));
+        assertEquals("Move 3 P2", "OK", handler.placeAt(5, 1, 4, 1));
+
+        assertEquals("Move 4 P1", "P1 wins", handler.placeAt(5, 9, 5, 14));
+        assertEquals("Move 4 P2", "Error, the game is already over.", handler.placeAt(8, 8, 8, 9));
+    }
+
+    @Test
+    public void  diagonalTest3() {
+        assertEquals("Move 1 P1", "OK", handler.placeAt(3, 0, 4, 1));
+        assertEquals("Move 1 P2", "OK", handler.placeAt(5, 5, 2, 1));
+
+        assertEquals("Move 2 P1", "OK", handler.placeAt(5, 2, 6, 3));
+        assertEquals("Move 2 P2", "OK", handler.placeAt(1, 2, 3, 1));
+
+        assertEquals("Move 3 P1", "OK", handler.placeAt(2, 19, 9, 9));
+        assertEquals("Move 3 P2", "OK", handler.placeAt(5, 1, 4, 2));
+
+        assertEquals("Move 4 P1", "P1 wins", handler.placeAt(1, 18, 0, 19));
         assertEquals("Move 4 P2", "Error, the game is already over.", handler.placeAt(8, 8, 8, 9));
     }
 }

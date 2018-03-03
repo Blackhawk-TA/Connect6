@@ -1,6 +1,5 @@
 package edu.kit.informatik.game;
 
-import com.sun.corba.se.impl.activation.CommandHandler;
 import edu.kit.informatik.commands.WinValidator;
 import org.junit.After;
 import org.junit.Before;
@@ -52,10 +51,6 @@ public class WinValidatorTest {
         }
 
         assertTrue("Draw", WinValidator.checkDraw(board));
-    }
-
-    @Test
-    public void checkWin() {
     }
 
     @Test

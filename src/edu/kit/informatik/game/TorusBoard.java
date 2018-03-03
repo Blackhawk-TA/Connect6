@@ -49,17 +49,20 @@ public class TorusBoard extends Board {
 
     /**
      * Win check for torus board diagonal lines
-     * @param diagonal the initial diagonal
-     * @param type diagonal type (bottom left to top right or top left to bottom right)
+     * @param row the row where to create the check line from
+     * @param column the column where to create the check line from
+     * @param type the check type,
      * @return the torus line for win check
      */
-    public String diagonalCheck(int row, int column, String diagonal, FormatType type) {
+    public String diagonalCheck(int row, int column, FormatType type) {
         LineFormat format = new LineFormat(this);
-        StringBuilder torusDiagonal = new StringBuilder();
-        String lastDiagonal;
-        String nextDiagonal;
-        String[][] board = this.getBoardString();
+        Board bigBoard = format.toBigBoard(this);
 
-        return "";
+        String check1 = format.getDiagonalLine(bigBoard, row, column, type);
+        String check2 = format.getDiagonalLine(bigBoard, row, column * 2, type);
+        String check3 = format.getDiagonalLine(bigBoard, row * 2, column, type);
+        String check4 = format.getDiagonalLine(bigBoard, row * 2, column * 2, type);
+
+        return check1 + check2 + check3 + check4;
     }
 }

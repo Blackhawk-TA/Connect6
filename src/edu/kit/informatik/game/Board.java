@@ -9,7 +9,7 @@ public class Board {
      * @param rows amount of rows the board should have
      * @param columns amount of columns the board should have
      */
-    Board(int rows, int columns) {
+    public Board(int rows, int columns) {
         this.rows = rows;
         this.columns = columns;
 

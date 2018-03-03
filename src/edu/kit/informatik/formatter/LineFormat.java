@@ -33,12 +33,13 @@ public class LineFormat extends GameCore {
 
     /**
      * Convert the diagonals to normal lines to check winner
+     * @param board the game board
      * @param row the row of the field
      * @param column the column of the field
      * @param type the type of diagonals, DIAGLB for bottom left to top right, DIAGLT for top left to bottom right
      * @return the diagonals as line
      */
-    public String getDiagonalLine(int row, int column, FormatType type) {
+    public String getDiagonalLine(Board board, int row, int column, FormatType type) {
         StringBuilder diagonalLine = new StringBuilder();
         int modRow = row;
         int modCol = column;
@@ -59,17 +60,41 @@ public class LineFormat extends GameCore {
         } else {
             while (modCol < board.getColumns() - 1) {
                 modCol++;
-                if (modRow < board.getRows() - 1)
-                    modRow++;
+                if (modRow > 0)
+                    modRow--;
             }
 
             for (int i = board.getRows() - 1; i > 0; i--) {
                 diagonalLine.append(board.getBoardString(modRow, modCol));
                 modCol--;
-                if (modRow > 0)
-                    modRow--;
+                if (modRow < board.getRows() - 1)
+                    modRow++;
             }
         }
         return diagonalLine.toString();
+    }
+
+    /**
+     * For torus board diagonal check, creates a board 4 times bigger filled 4x with the game board
+     * @param board the game board
+     * @return the big board
+     */
+    public Board toBigBoard(Board board) {
+        Board bigBoard = new Board(board.getRows() * 2, board.getColumns() * 2);
+        for (int i = 0; i < bigBoard.getRows(); i++) {
+            int k = i;
+            if (i >= board.getRows() - 1) {
+                k -= board.getRows();
+            }
+            for (int j = 0; j < bigBoard.getColumns(); j++) {
+                int l = j;
+                if (j >= board.getColumns() - 1) {
+                    l -= board.getColumns();
+                }
+                bigBoard.setBoardString(i, j, board.getBoardString(k, l));
+            }
+        }
+
+        return bigBoard;
     }
 }
