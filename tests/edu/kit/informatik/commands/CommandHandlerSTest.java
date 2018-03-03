@@ -4,6 +4,7 @@ import edu.kit.informatik.formatter.FormatType;
 import edu.kit.informatik.game.Board;
 import edu.kit.informatik.game.GameCore;
 import edu.kit.informatik.game.Player;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -36,8 +37,8 @@ public class CommandHandlerSTest {
     @Test
     public void linePrint() {
         handler.placeAt(0, 0, 0, 5);
-        String exOut1 = "P1 ** ** ** ** P1 ** ** ** ** ** ** ** ** ** ** ** ** ";
-        String exOut2 = "P1 ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ";
+        String exOut1 = "P1 ** ** ** ** P1 ** ** ** ** ** ** ** ** ** ** ** **";
+        String exOut2 = "P1 ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** **";
         assertEquals("Row correct", exOut1, handler.linePrint(0, FormatType.ROW));
         assertEquals("Column correct", exOut2, handler.linePrint(0, FormatType.COLUMN));
     }
@@ -49,6 +50,39 @@ public class CommandHandlerSTest {
         assertEquals("State of", "P1 ", handler.stateOf(5,5));
         assertEquals("State of", "** ", handler.stateOf(1,1));
         assertEquals("State of", "P2 ", handler.stateOf(1,0));
+    }
+
+    @Test
+    public void outOfBounds() {
+        assertEquals("Out of bounds", "Error, at least one field doesn't exist or is already occupied.",
+                handler.placeAt(-1, 0, 0, 25));
+    }
+
+    @Test
+    public void print() {
+        String ex = "P1 ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** P2\n"
+                + "** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** **\n"
+                + "** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** **\n"
+                + "** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** **\n"
+                + "** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** **\n"
+                + "** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** **\n"
+                + "** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** **\n"
+                + "** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** **\n"
+                + "** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** **\n"
+                + "** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** **\n"
+                + "** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** **\n"
+                + "** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** **\n"
+                + "** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** **\n"
+                + "** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** **\n"
+                + "** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** **\n"
+                + "** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** **\n"
+                + "** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** **\n"
+                + "P2 ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** P1";
+
+        handler.placeAt(0, 0, 17, 17);
+        handler.placeAt(0, 17, 17, 0);
+
+        assertEquals("Print", ex, handler.print());
     }
 
     @Test

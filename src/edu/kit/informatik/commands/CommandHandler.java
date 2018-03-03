@@ -28,7 +28,11 @@ class CommandHandler extends GameCore {
             for (int j = 0; j < board.getColumns(); j++) {
                 boardFormatted.append(board.getBoardString(i, j));
             }
-            boardFormatted.append("\n");
+
+            boardFormatted.deleteCharAt(boardFormatted.length() - 1);
+            if (i < board.getRows() - 1) {
+                boardFormatted.append("\n");
+            }
         }
         return boardFormatted.toString();
     }
@@ -41,7 +45,7 @@ class CommandHandler extends GameCore {
      */
     String linePrint(int n, FormatType type) {
         LineFormat format = new LineFormat(board);
-        return format.toLine(n, type);
+        return format.toLine(n, type).trim();
     }
 
     /**

@@ -3,14 +3,13 @@ package edu.kit.informatik.commands;
 import edu.kit.informatik.formatter.FormatType;
 import edu.kit.informatik.game.Board;
 import edu.kit.informatik.game.GameCore;
-
 import edu.kit.informatik.game.Player;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
-
 
 public class CommandHandlerTTest {
     private GameCore core;
@@ -38,8 +37,8 @@ public class CommandHandlerTTest {
     @Test
     public void linePrint() {
         handler.placeAt(0, 0, 0, -5);
-        String exOut1 = "P1 ** ** ** ** ** ** ** ** ** ** ** ** ** ** P1 ** ** ** ** ";
-        String exOut2 = "P1 ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ";
+        String exOut1 = "P1 ** ** ** ** ** ** ** ** ** ** ** ** ** ** P1 ** ** ** **";
+        String exOut2 = "P1 ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** **";
         assertEquals("Row correct", exOut1, handler.linePrint(0, FormatType.ROW));
         assertEquals("Column correct", exOut2, handler.linePrint(0, FormatType.COLUMN));
     }
