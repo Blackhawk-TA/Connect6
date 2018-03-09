@@ -8,7 +8,6 @@ public class Main {
      * @param args console input, not used!
      */
     public static void main(String[] args) {
-        InitHandler handler = new InitHandler();
-        handler.init(args);
+        InitHandler.init(args);
     }
 }

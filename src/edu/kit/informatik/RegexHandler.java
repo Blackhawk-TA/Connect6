@@ -13,17 +13,17 @@ public class RegexHandler {
      */
     public RegexHandler(String mode) {
         switch (mode) {
-            case "init":
-                pattern = Pattern.compile("^(standard|torus)\\s(18|20)\\s([2-4])$"); //pattern for init param
+            case "init": //pattern for init param
+                pattern = Pattern.compile("^(standard|torus)\\s(18|20)\\s([2-4])$");
                 groupMod = 1; //when input is for game init, params start at index 1
                 groupNum = 4;
                 break;
-            case "command":
-                pattern = Pattern.compile("^([a-z]+)(\\s)?(-?\\d*)?;?(-?\\d*)?;?(-?\\d*)?;?(-?\\d*)$"); //for normal cmd
+            case "command": //for normal cmd
+                pattern = Pattern.compile("^([a-z]+)(\\s)?(-?\\d{0,9})?;?(-?\\d{0,9})?;?(-?\\d{0,9})?;?(-?\\d{0,9})$");
                 groupMod = 3; //when input is a normal command like "print" or "place 5;5;5;5", params start at index 3
                 groupNum = 7;
                 break;
-            case "winCheck":
+            case "winCheck": //pattern for win check
                 pattern = Pattern.compile("((P1\\s){6}|(P2\\s){6}|(P3\\s){6}|(P4\\s){6})");
                 groupMod = 0; //not required for this check
                 groupNum = 6;
@@ -44,11 +44,12 @@ public class RegexHandler {
 
         if (n == 0 && groups[2] != null)
             return false;
+        else if (n > 0 && groups[2] == null)
+            return false;
 
         for (int i = groupMod; i < groups.length; i++) {
-            if (counter == n && !groups[i].isEmpty()) {
+            if (counter == n && !groups[i].isEmpty())
                 return false;
-            }
 
             if (groups[i] != null && !groups[i].isEmpty())
                 counter++;

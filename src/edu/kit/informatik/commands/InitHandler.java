@@ -9,7 +9,7 @@ public class InitHandler {
      * Check init params and apply them
      * @param args the init params
      */
-    public void init(String[] args) {
+    public static void init(String[] args) {
         //Format String array to normal String
         StringBuilder argsFormatted = new StringBuilder();
         for (String arg: args) {

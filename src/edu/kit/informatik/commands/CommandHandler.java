@@ -54,8 +54,7 @@ class CommandHandler extends GameCore {
      */
     void reset(String[] args) {
         gameOver = false;
-        InitHandler handler = new InitHandler();
-        handler.init(args);
+        InitHandler.init(args);
     }
 
     /**
@@ -65,7 +64,11 @@ class CommandHandler extends GameCore {
      * @return registered entry at requested field
      */
     String stateOf(int row, int column) {
-        return board.getBoardString(row, column);
+        String boardString = board.getBoardString(row, column);
+        if (!boardString.isEmpty())
+            return board.getBoardString(row, column).trim();
+        else
+            return "Error, input out of bounds.";
     }
 
     /**
@@ -81,7 +84,7 @@ class CommandHandler extends GameCore {
         String winner1;
         String winner2;
 
-        //Modified functions parameters because they can't be modified due to checkstyle, much better
+        //Modified function parameters because they can't be modified due to checkstyle, makes  the code much better...
         int row1Mod = row1;
         int col1Mod = column1;
         int row2Mod = row2;

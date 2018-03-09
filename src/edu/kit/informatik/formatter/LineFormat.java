@@ -23,10 +23,14 @@ public class LineFormat extends GameCore {
     public String toLine(int n, FormatType type) {
         StringBuilder boardFormatted = new StringBuilder();
         for (int i = 0; i < board.getBoardString().length; i++) {
-            if (type == FormatType.ROW)
-                boardFormatted.append(board.getBoardString(n, i));
-            else if (type == FormatType.COLUMN)
-                boardFormatted.append(board.getBoardString(i, n));
+            String boardStringRow = board.getBoardString(n, i);
+            String boardStringCol = board.getBoardString(i, n);
+            if (type == FormatType.ROW && !boardStringCol.isEmpty())
+                boardFormatted.append(boardStringRow);
+            else if (type == FormatType.COLUMN && !boardStringCol.isEmpty())
+                boardFormatted.append(boardStringCol);
+            else
+                return "Error, input out of bounds.";
         }
         return boardFormatted.toString();
     }

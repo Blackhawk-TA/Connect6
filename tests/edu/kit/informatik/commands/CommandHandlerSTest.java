@@ -44,12 +44,23 @@ public class CommandHandlerSTest {
     }
 
     @Test
+    public void linePrintOOB() {
+        assertEquals("Column out of bounds", "Error, input out of bounds.", handler.linePrint(-999, FormatType.ROW));
+        assertEquals("Column out of bounds", "Error, input out of bounds.", handler.linePrint(999, FormatType.COLUMN));
+    }
+
+    @Test
     public void stateOf() {
         handler.placeAt(5, 5, 0, 0);
         handler.placeAt(3, 3, 1, 0);
-        assertEquals("State of", "P1 ", handler.stateOf(5,5));
-        assertEquals("State of", "** ", handler.stateOf(1,1));
-        assertEquals("State of", "P2 ", handler.stateOf(1,0));
+        assertEquals("State of", "P1", handler.stateOf(5,5));
+        assertEquals("State of", "**", handler.stateOf(1,1));
+        assertEquals("State of", "P2", handler.stateOf(1,0));
+    }
+
+    @Test
+    public void stateOfOOB() {
+        assertEquals("State out of bounds", "Error, input out of bounds.", handler.stateOf(-999,999));
     }
 
     @Test
@@ -140,6 +151,9 @@ public class CommandHandlerSTest {
 
         assertEquals("Move 4 P1", "OK", handler.placeAt(6, 1, 9, 1));
         assertEquals("Move 4 P2", "P2 wins", handler.placeAt(3, 9, 5, 5));
+
+        assertEquals("Move 5 P1", "Error, the game is already over.", handler.placeAt(8, 8, 8, 9));
+        assertEquals("Move 5 P2", "Error, the game is already over.", handler.placeAt(9, 9, 9, 10));
     }
 
     @Test

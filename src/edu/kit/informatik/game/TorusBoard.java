@@ -22,7 +22,8 @@ public class TorusBoard extends Board {
     public String getBoardString(int row, int column) {
         int torusRow = toTorus(row);
         int torusCol = toTorus(column);
-        return super.getBoardString(torusRow, torusCol);
+        String[][] board = super.getBoardString();
+        return board[torusRow][torusCol];
     }
 
     /**

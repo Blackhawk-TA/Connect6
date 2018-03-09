@@ -5,13 +5,13 @@ import edu.kit.informatik.formatter.*;
 import edu.kit.informatik.game.Board;
 import edu.kit.informatik.game.TorusBoard;
 
-public class WinValidator {
+class WinValidator {
     /**
      * Check if game ends as draw
      * @param board the game board
      * @return true when draw, false if not
      */
-    public static boolean checkDraw(Board board) { //TODO remove public
+    static boolean checkDraw(Board board) {
         int rows = board.getRows();
         int columns = board.getColumns();
 
@@ -75,7 +75,7 @@ public class WinValidator {
      * @param line horizontal or vertical line depending on input
      * @return empty String if no winner, else return winner
      */
-    public static String regexWinCheck(String line) { //TODO change to private
+    private static String regexWinCheck(String line) {
         RegexHandler regex = new RegexHandler("winCheck");
         String[] groups = regex.createGroups(line);
         for (int i = groups.length - 1; i > 1; i--) {

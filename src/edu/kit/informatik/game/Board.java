@@ -53,7 +53,10 @@ public class Board {
      * @return get the board state as String
      */
     public String getBoardString(int row, int column) {
-        return board[row][column];
+        if (row < rows && column < columns && row >= 0 && column >= 0)
+            return board[row][column];
+        else
+            return "";
     }
 
     /**

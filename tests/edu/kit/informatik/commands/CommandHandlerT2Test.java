@@ -11,7 +11,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class CommandHandlerTTest {
+public class CommandHandlerT2Test {
     private GameCore core;
     private Board board;
     private Player player;
@@ -44,10 +44,22 @@ public class CommandHandlerTTest {
     }
 
     @Test
+    public void linePrintOOB() {
+        String exOut = "** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** **";
+        assertEquals("Column out of bounds", exOut, handler.linePrint(-999, FormatType.COLUMN));
+        assertEquals("Column out of bounds", exOut, handler.linePrint(999, FormatType.COLUMN));
+    }
+
+    @Test
     public void stateOf() {
         assertEquals("Place", "OK", handler.placeAt(-1, -5, 22, 25));
-        assertEquals("State of", "P1 ", handler.stateOf(19,15));
-        assertEquals("State of", "P1 ", handler.stateOf(2,5));
+        assertEquals("State of", "P1", handler.stateOf(19,15));
+        assertEquals("State of", "P1", handler.stateOf(2,5));
+    }
+
+    @Test
+    public void stateOfOOB() {
+        assertEquals("State out of bounds", "**", handler.stateOf(-999,999));
     }
 
     @Test

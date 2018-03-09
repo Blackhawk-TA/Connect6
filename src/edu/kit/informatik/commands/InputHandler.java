@@ -56,7 +56,7 @@ class InputHandler extends CommandHandler {
                     Terminal.printLine(super.stateOf(regex.getParam(groups, 0), regex.getParam(groups, 1)));
                 }
                 else {
-                    Terminal.printError("unknown command.");
+                    Terminal.printError("unknown command or the input parameters are invalid.");
                 }
             }
             else {
